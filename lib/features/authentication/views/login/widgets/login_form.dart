@@ -15,7 +15,7 @@ class TLoginForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final PasswordController controller = Get.put(PasswordController());
+    final PasswordController passwordController = Get.put(PasswordController());
 
     return Form(
       child: Padding(
@@ -33,15 +33,15 @@ class TLoginForm extends StatelessWidget {
 
             // Password
             Obx(() => TextFormField(
-              obscureText: !controller.isPasswordVisible.value,
+              obscureText: !passwordController.isPasswordVisible.value,
               decoration: InputDecoration(
                 prefixIcon: const Icon(Iconsax.password_check),
                 labelText: 'Password', // Replace with your label text variable
                 suffixIcon: IconButton(
                   icon: Icon(
-                    controller.isPasswordVisible.value ? Iconsax.eye_slash : Iconsax.eye,
+                    passwordController.isPasswordVisible.value ? Iconsax.eye_slash : Iconsax.eye,
                   ),
-                  onPressed: controller.togglePasswordVisibility,
+                  onPressed: passwordController.togglePasswordVisibility,
                 ),
               ),
             )),
