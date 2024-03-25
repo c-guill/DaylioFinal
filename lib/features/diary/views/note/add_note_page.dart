@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:daylio/features/diary/views/note/write_note.dart'; 
 
 class AddNoteScreen extends StatelessWidget {
   const AddNoteScreen({super.key});
@@ -118,7 +119,48 @@ class AddNoteScreen extends StatelessWidget {
             ),
           ],
         ),
-        
+        SizedBox(height: 40),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Expanded(
+              child: FractionallySizedBox(
+              widthFactor: 0.8,
+              child: Container(
+                height: 100,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Write a Quick note", // Texte
+                      style: TextStyle(color: Colors.black, fontSize: 16),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => WriteNoteScreen()), // Rediriger vers Page2
+                        );
+                      },
+                      child: Text(
+                        'Cliquez ici pour aller à la Page 2',
+                        style: TextStyle(
+                          color: Colors.blue, // Couleur du texte bleu pour indiquer un lien
+                          decoration: TextDecoration.underline, // Soulignez le texte pour indiquer qu'il est cliquable
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              ),
+            ),
+          ],
+        ),
       ],
     ),
   );
