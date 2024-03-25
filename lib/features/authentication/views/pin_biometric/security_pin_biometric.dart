@@ -140,7 +140,7 @@ class _SecurityPinBiometricScreenState extends State<SecurityPinBiometricScreen>
   Widget numButton(int number) {
     final controller = Get.put(SecurityPinBiometricController());
     return Padding(
-      padding: const EdgeInsets.only(top: 16),
+      padding: const EdgeInsets.only(top: TSizes.securityPinHeightSm),
       child: TextButton(
           onPressed: () {
             setState(() {
