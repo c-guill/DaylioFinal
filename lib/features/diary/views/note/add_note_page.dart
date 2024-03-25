@@ -1,3 +1,4 @@
+import 'package:daylio/common/widgets/basic_widget/container.dart';
 import 'package:flutter/material.dart';
 import 'package:daylio/features/diary/views/note/write_note.dart'; 
 
@@ -39,13 +40,11 @@ class AddNoteScreen extends StatelessWidget {
             Expanded(
               child: FractionallySizedBox(
               widthFactor: 0.8,
-              child: Container(
+              child: ContainerCustom(
                 height: 100,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                ),
+                width: double.infinity,
                 child: Column(
+
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
@@ -55,8 +54,8 @@ class AddNoteScreen extends StatelessWidget {
                     SizedBox(width: 10),
                     Expanded(
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
                           Icon(Icons.sentiment_very_satisfied, color: Colors.black),
                           Icon(Icons.sentiment_satisfied, color: Colors.black),
                           Icon(Icons.sentiment_neutral, color: Colors.black),
