@@ -1,3 +1,4 @@
+import 'package:daylio/features/authentication/controllers/login/password_controller.dart';
 import 'package:daylio/features/authentication/views/password_configuration/forget_password.dart';
 import 'package:daylio/features/authentication/views/signup/signup.dart';
 import 'package:daylio/features/authentication/views/pin_biometric/security_pin_biometric.dart';
@@ -14,6 +15,8 @@ class TLoginForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final PasswordController controller = Get.put(PasswordController());
+
     return Form(
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: TSizes.spaceBtwSections),
@@ -29,13 +32,19 @@ class TLoginForm extends StatelessWidget {
             const SizedBox(height: TSizes.spaceBtwInputFields),
 
             // Password
-            TextFormField(
-              decoration: const InputDecoration(
-                prefixIcon: Icon(Iconsax.password_check),
-                labelText: TTexts.password,
-                suffixIcon: Icon(Iconsax.eye),
+            Obx(() => TextFormField(
+              obscureText: !controller.isPasswordVisible.value,
+              decoration: InputDecoration(
+                prefixIcon: const Icon(Iconsax.password_check),
+                labelText: 'Password', // Replace with your label text variable
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    controller.isPasswordVisible.value ? Iconsax.eye_slash : Iconsax.eye,
+                  ),
+                  onPressed: controller.togglePasswordVisibility,
+                ),
               ),
-            ),
+            )),
             const SizedBox(height: TSizes.spaceBtwInputFields / 2),
 
             // Remember Me & Forgot Password

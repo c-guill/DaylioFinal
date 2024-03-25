@@ -15,7 +15,7 @@ class CalendarScreen extends StatelessWidget {
             // Calendar
             ContainerCustom(
               height: 150,
-              child: const Text('Calendar'),
+              child: Text('Calendar'),
             ),
             // Mood count
           ]),
