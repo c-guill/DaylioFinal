@@ -41,8 +41,10 @@ class AddNoteScreen extends StatelessWidget {
               child: FractionallySizedBox(
               widthFactor: 0.8,
               child: ContainerCustom(
-                height: double.infinity,
+                height: 100,
+                width: double.infinity,
                 child: Column(
+
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
@@ -52,8 +54,8 @@ class AddNoteScreen extends StatelessWidget {
                     SizedBox(width: 10),
                     Expanded(
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
                           Icon(Icons.sentiment_very_satisfied, color: Colors.black),
                           Icon(Icons.sentiment_satisfied, color: Colors.black),
                           Icon(Icons.sentiment_neutral, color: Colors.black),
