@@ -1,3 +1,5 @@
+import 'package:daylio/common/styles/spacing_styles.dart';
+import 'package:daylio/common/widgets/basic_widget/container.dart';
 import 'package:flutter/material.dart';
 
 class CalendarScreen extends StatelessWidget {
@@ -7,12 +9,16 @@ class CalendarScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            // Text
-            SizedBox(height: 400),
-            Center(child: Text('Calendar Screen')),
-          ],
+        child: Padding(
+          padding: TSpacingStyles.paddingWithAppBarHeight,
+          child: Column(children: [
+            // Calendar
+            ContainerCustom(
+              height: 150,
+              child: const Text('Calendar'),
+            ),
+            // Mood count
+          ]),
         ),
       ),
     );
