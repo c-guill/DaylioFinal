@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "352535974638",
+    "project_id": "daylioflutter",
+    "storage_bucket": "daylioflutter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:352535974638:android:540e7cd519a3f9c71e99ff",
+        "android_client_info": {
+          "package_name": "com.example.daylio"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "352535974638-h7qfg3sh1p8sprjb67c6pcmdhk734eun.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyARvvgJPowrfDArZEz-K9Jhz0NB91CwWD8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "352535974638-h7qfg3sh1p8sprjb67c6pcmdhk734eun.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "352535974638-ma8psio5b6nj5mmerold0ct01ie2gboa.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.daylio"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
