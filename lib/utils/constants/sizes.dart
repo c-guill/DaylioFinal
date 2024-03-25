@@ -87,6 +87,7 @@ class TSizes {
   static const double dotSize = 9.0;
   static const double dotSpacing = 20.0;
   static const double dotRadius = 50.0;
+  static const double dotFullWidth = 150;
 }
 
 
