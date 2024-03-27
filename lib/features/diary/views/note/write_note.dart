@@ -5,23 +5,37 @@ class WriteNoteScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String noteText = ''; 
+
     return Scaffold(
       appBar: AppBar(
         actions: [
           IconButton(
-            icon: Icon(Icons.close), // Utiliser l'icône de fermeture
+            icon: Icon(Icons.done),
             onPressed: () {
-              Navigator.pop(context); // Fermer l'écran actuel
+              Navigator.pop(context, noteText); // Transmettre le texte à l'écran précédent
             },
           ),
         ],
       ),
-      body: SingleChildScrollView(
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            // Text
-            SizedBox(height: 20),
-            
+            Expanded(
+              child: TextField(
+                textAlignVertical: TextAlignVertical.top,
+                maxLines: null,
+                expands: true,
+                decoration: InputDecoration(
+                  hintText: 'Write your note here...',
+                  border: InputBorder.none,
+                ),
+                onChanged: (value) {
+                  noteText = value; // Mettre à jour le texte lorsque l'utilisateur saisit
+                },
+              ),
+            ),
           ],
         ),
       ),
