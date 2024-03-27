@@ -1,3 +1,4 @@
+import 'package:daylio/features/authentication/controllers/login/password_controller.dart';
 import 'package:daylio/features/authentication/views/signup/verify_email.dart';
 import 'package:daylio/features/authentication/views/signup/widgets/terms_conditions_checkbox.dart';
 import 'package:daylio/utils/constants/sizes.dart';
@@ -13,6 +14,8 @@ class TSignupForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final PasswordController passwordController = Get.put(PasswordController());
+
     return Form(
       child: Column(
         children: [
@@ -63,14 +66,19 @@ class TSignupForm extends StatelessWidget {
           const SizedBox(height: TSizes.spaceBtwInputFields),
 
           // Password
-          TextFormField(
-            expands: false,
-            decoration: const InputDecoration(
-              labelText: TTexts.password,
-              prefixIcon: Icon(Iconsax.password_check),
-              suffixIcon: Icon(Iconsax.eye_slash),
+          Obx(() => TextFormField(
+            obscureText: !passwordController.isPasswordVisible.value,
+            decoration: InputDecoration(
+              prefixIcon: const Icon(Iconsax.password_check),
+              labelText: 'Password', // Replace with your label text variable
+              suffixIcon: IconButton(
+                icon: Icon(
+                  passwordController.isPasswordVisible.value ? Iconsax.eye_slash : Iconsax.eye,
+                ),
+                onPressed: passwordController.togglePasswordVisibility,
+              ),
             ),
-          ),
+          )),
           const SizedBox(height: TSizes.spaceBtwInputFields),
 
           // Terms and Conditions Checkbox
