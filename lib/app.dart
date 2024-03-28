@@ -39,7 +39,7 @@ class App extends StatelessWidget {
             FlutterNativeSplash.remove();
 
             // Once images are loaded, show the right screen
-            return UID == "" ? const OnBoardingScreen() : const SecurityPinBiometricScreen();
+            return UID == "" ? const OnBoardingScreen() : const SecurityPinBiometricScreen(setPin: false,);
           } else if (snapshot.hasError) {
             // Ideally handle initialization errors here
             FlutterNativeSplash.remove(); // Ensure splash screen is removed even on error

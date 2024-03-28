@@ -123,7 +123,7 @@ class _TLoginFormState extends State<TLoginForm> {
       User? user = await _auth.signInWithEmailAndPassword(email, password);
       if(user != null) {
         if(user.emailVerified){
-          Get.to(() => const SecurityPinBiometricScreen(),
+          Get.to(() => const SecurityPinBiometricScreen(setPin: true,),
               transition: Transition.downToUp);
           showToast(message: TTexts.sucessfullogin);
           manageData.setUID(user);
