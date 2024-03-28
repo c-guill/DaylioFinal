@@ -3,12 +3,19 @@ import 'package:daylio/utils/constants/image_strings.dart';
 import 'package:daylio/utils/constants/sizes.dart';
 import 'package:daylio/utils/constants/text_strings.dart';
 import 'package:daylio/utils/helpers/helper_functions.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../controllers/firebase_auth_services.dart';
+
 class ResetPassword extends StatelessWidget {
-  const ResetPassword({super.key});
+  ResetPassword({super.key, required this.email});
+
+  final String email;
+  final FirebaseAuthService _auth = FirebaseAuthService();
+
 
   @override
   Widget build(BuildContext context) {
@@ -51,12 +58,19 @@ class ResetPassword extends StatelessWidget {
               const SizedBox(height: TSizes.spaceBtwItems),
               SizedBox(
                 width: double.infinity,
-                child: TextButton(onPressed: () {}, child: const Text(TTexts.resendEmail)),
+                child: TextButton(onPressed: _forgetPassword, child: const Text(TTexts.resendEmail)),
               ),
             ],
           ),
         ),
       ),
     );
+  }
+  _forgetPassword() async {
+    try {
+      await _auth.sendPasswordResetEmail(email);
+    } on FirebaseAuthException catch(e){
+      print(e);
+    }
   }
 }
