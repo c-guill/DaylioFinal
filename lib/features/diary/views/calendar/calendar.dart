@@ -6,6 +6,7 @@ import 'package:daylio/common/widgets/calendar/calendar_dropdown.dart';
 import 'package:daylio/features/diary/controllers/calendar/calendar_controller.dart';
 import 'package:daylio/features/diary/views/calendar/widgets/calendar_appbar.dart';
 import 'package:daylio/features/diary/views/calendar/widgets/mood_calendar.dart';
+import 'package:daylio/features/diary/views/calendar/widgets/mood_count_chart.dart';
 import 'package:daylio/utils/constants/colors.dart';
 import 'package:daylio/utils/constants/sizes.dart';
 import 'package:daylio/utils/helpers/helper_functions.dart';
