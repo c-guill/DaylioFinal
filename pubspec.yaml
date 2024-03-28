@@ -20,7 +20,10 @@ dependencies:
   url_launcher: ^6.1.12
   flutter_native_splash: ^2.3.2
   smooth_page_indicator: ^1.1.0
+  fluttertoast: ^8.2.2
   local_auth: ^2.2.0
+  file_picker: ^8.0.0+1
+  shared_preferences: ^2.2.2
   table_calendar: ^3.0.8
   d_chart: ^2.6.9
 
@@ -40,7 +43,10 @@ dependencies:
 
   # Firebase
   firebase_core: ^2.27.1
-
+  cloud_firestore: ^4.8.2
+  firebase_auth: ^4.6.3
+  firebase_storage: ^11.2.4
+  google_sign_in: ^6.1.5
 
 #------------------------- ./ PACKAGES END -------------------------#
 dev_dependencies:

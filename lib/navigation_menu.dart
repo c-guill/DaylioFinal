@@ -93,7 +93,7 @@ class NavigationController extends GetxController {
     HomeScreen(),
     const StatScreen(),
     const CalendarScreen(),
-    const WalletScreen(),
+    WalletScreen(),
     const SettingsScreen(),
   ];
 }
