@@ -25,7 +25,7 @@ class OnBoardingNextButton extends StatelessWidget {
             textStyle: const TextStyle(fontSize: TSizes.md, color: TColors.textWhite, fontWeight: FontWeight.w600),
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(TSizes.onBoardingButtonRadius)),
           ).copyWith(
-            minimumSize: MaterialStateProperty.all(const Size(TSizes.onBoardingButtonWidth, TSizes.onBoardingButtonHeight)),
+            minimumSize: MaterialStateProperty.all(Size(THelperFunctions.screenWidth() - TSizes.spaceOnBoarding*2 - TSizes.dotFullWidth, TSizes.onBoardingButtonHeight)),
           ),
           child: const Text('Next')),
     );

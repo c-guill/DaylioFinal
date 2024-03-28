@@ -87,26 +87,32 @@ class _SecurityPinBiometricScreenState extends State<SecurityPinBiometricScreen>
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  TextButton(
-                    onPressed: _authenticate,
-                    child: const TPinCodeIcon(number: 1),
+                  Padding(
+                    padding: const EdgeInsets.only(top: TSizes.securityPinHeightSm),
+                    child: TextButton(
+                      onPressed: _authenticate,
+                      child: const TPinCodeIcon(number: 1),
+                    ),
                   ),
 
                   numButton(0),
 
                   // Delete Button
-                  TextButton(
-                    onPressed: () {
-                      setState(
-                        () {
-                          if (enteredPin.isNotEmpty) {
-                            enteredPin =
-                                enteredPin.substring(0, enteredPin.length - 1);
-                          }
-                        },
-                      );
-                    },
-                    child: const TPinCodeIcon(number: 2),
+                  Padding(
+                    padding: const EdgeInsets.only(top: TSizes.securityPinHeightSm),
+                    child: TextButton(
+                      onPressed: () {
+                        setState(
+                          () {
+                            if (enteredPin.isNotEmpty) {
+                              enteredPin =
+                                  enteredPin.substring(0, enteredPin.length - 1);
+                            }
+                          },
+                        );
+                      },
+                      child: const TPinCodeIcon(number: 2),
+                    ),
                   ),
                 ],
               ),
@@ -140,7 +146,7 @@ class _SecurityPinBiometricScreenState extends State<SecurityPinBiometricScreen>
   Widget numButton(int number) {
     final controller = Get.put(SecurityPinBiometricController());
     return Padding(
-      padding: const EdgeInsets.only(top: 16),
+      padding: const EdgeInsets.only(top: TSizes.securityPinHeightSm),
       child: TextButton(
           onPressed: () {
             setState(() {

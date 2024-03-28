@@ -14,8 +14,8 @@ class TPinCodeButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final darkMode = THelperFunctions.isDarkMode(context);
     return Container(
-      width: TSizes.securityPinHeight + TSizes.securityPinHeightSm, // Set the width of the circle
-      height: TSizes.securityPinHeight + TSizes.securityPinHeightSm, // Set the height of the circle
+      width: TSizes.securityPinHeight + TSizes.securityPinHeightSm/2, // Set the width of the circle
+      height: TSizes.securityPinHeight + TSizes.securityPinHeightSm/2, // Set the height of the circle
       decoration: BoxDecoration(
         color: darkMode ? TColors.black : TColors.white, // Set the color of the circle
         shape: BoxShape.circle, // Set the shape of the container to be a circle
