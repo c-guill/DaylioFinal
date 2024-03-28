@@ -90,5 +90,7 @@ class TTexts {
   static const String other = "Other";
   static const String help = "Help";
   static const String logout = "Logout";
+  static const String editPersonalDetails = "Edit personal details";
+  static const String fullName = "Full name";
 }
 

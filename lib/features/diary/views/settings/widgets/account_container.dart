@@ -6,7 +6,7 @@ import 'package:daylio/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
-import '../personal_details.dart';
+import '../account/personal_details.dart';
 
 class AccountContainer extends StatelessWidget {
   const AccountContainer({super.key});
@@ -29,19 +29,21 @@ class AccountContainer extends StatelessWidget {
           const SizedBox(height: TSizes.spaceBtwSections),
           GestureDetector(
             onTap: () {
-              // Navigate to PersonalDataPage
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const PersonalDataPage()),
+                MaterialPageRoute(
+                    builder: (context) => const PersonalDataPage()),
               );
             },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
-                  TTexts.personalDetails,
-                  style: TextStyle(
-                    fontSize: TSizes.fontSizeMd,
+                const Expanded(
+                  child: Text(
+                    TTexts.personalDetails,
+                    style: TextStyle(
+                      fontSize: TSizes.fontSizeMd,
+                    ),
                   ),
                 ),
                 Icon(
