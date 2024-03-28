@@ -50,11 +50,11 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyARvvgJPowrfDArZEz-K9Jhz0NB91CwWD8',
-    appId: '1:352535974638:android:540e7cd519a3f9c71e99ff',
-    messagingSenderId: '352535974638',
-    projectId: 'daylioflutter',
-    storageBucket: 'daylioflutter.appspot.com',
+    apiKey: 'AIzaSyAiZZQ7APo-pIoS3on_8jEPRn1Lq7RRVqk',
+    appId: '1:741856604118:android:56bae3d8c16631592ebe77',
+    messagingSenderId: '741856604118',
+    projectId: 'daylio-13d12',
+    storageBucket: 'daylio-13d12.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(

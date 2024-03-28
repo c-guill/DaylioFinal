@@ -1,41 +1,34 @@
 {
   "project_info": {
-    "project_number": "352535974638",
-    "project_id": "daylioflutter",
-    "storage_bucket": "daylioflutter.appspot.com"
+    "project_number": "741856604118",
+    "project_id": "daylio-13d12",
+    "storage_bucket": "daylio-13d12.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:352535974638:android:540e7cd519a3f9c71e99ff",
+        "mobilesdk_app_id": "1:741856604118:android:56bae3d8c16631592ebe77",
         "android_client_info": {
           "package_name": "com.example.daylio"
         }
       },
       "oauth_client": [
         {
-          "client_id": "352535974638-h7qfg3sh1p8sprjb67c6pcmdhk734eun.apps.googleusercontent.com",
+          "client_id": "741856604118-o0ncbvtppfvdr41s3169r3dlra8jps5j.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyARvvgJPowrfDArZEz-K9Jhz0NB91CwWD8"
+          "current_key": "AIzaSyAiZZQ7APo-pIoS3on_8jEPRn1Lq7RRVqk"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "352535974638-h7qfg3sh1p8sprjb67c6pcmdhk734eun.apps.googleusercontent.com",
+              "client_id": "741856604118-o0ncbvtppfvdr41s3169r3dlra8jps5j.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "352535974638-ma8psio5b6nj5mmerold0ct01ie2gboa.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.daylio"
-              }
             }
           ]
         }
