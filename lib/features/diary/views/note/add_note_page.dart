@@ -1,4 +1,5 @@
 import 'package:daylio/common/widgets/basic_widget/container.dart';
+import 'package:daylio/features/diary/views/note/noteData.dart';
 import 'package:daylio/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:daylio/features/diary/views/note/write_note.dart'; 
@@ -13,7 +14,6 @@ class AddNoteScreen extends StatefulWidget {
 }
 
 class _AddNoteScreen extends State<AddNoteScreen>{
-  String texte = "";
   bool tap = false;
   Map<String, bool> tapStates = {
     'very_sad_b.png': false,
@@ -36,6 +36,13 @@ class _AddNoteScreen extends State<AddNoteScreen>{
     'sad2_b.png': false,
     'anxious_b.png': false,
   };
+  Note myData = Note(
+    text: '',
+    emotion: 0,
+    feeling: [],
+    image: [],
+    date: DateTime.now()
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -109,7 +116,7 @@ class _AddNoteScreen extends State<AddNoteScreen>{
               child: FractionallySizedBox(
               widthFactor: 0.8,
               child:ContainerCustom(
-                height: 300,
+                height: 290,
                 width: double.infinity,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -118,7 +125,7 @@ class _AddNoteScreen extends State<AddNoteScreen>{
                       TTexts.emotions, // Texte
                       style: TextStyle(color: TColors.iconPrimaryLight , fontSize: 16),
                     ),
-                    SizedBox(width: 40),
+                    SizedBox(height: 10),
                     Expanded(
                       child: Wrap(
                         spacing: 20, // Espacement horizontal entre les enfants
@@ -166,23 +173,27 @@ class _AddNoteScreen extends State<AddNoteScreen>{
                     ),
                     GestureDetector(
                       onTap: () async {
-                        texte = await Navigator.push(
+                        String? result = await Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => WriteNoteScreen()), // Rediriger vers Page2
+                          MaterialPageRoute(builder: (context) => WriteNoteScreen(myData: myData)), 
                         );
+                        if (result != null) {
+                          myData.text = result;
+                        }
                       },
                       child: Text(
                         TTexts.openNote,
                         style: TextStyle(
-                          color: Colors.blue, // Couleur du texte bleu pour indiquer un lien
-                          decoration: TextDecoration.underline, // Soulignez le texte pour indiquer qu'il est cliquable
+                          color: Colors.blue, 
+                          decoration: TextDecoration.underline, 
                         ),
                       ),
                     ),
                     TextField(
+                      enabled: false,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
-                          hintText: TTexts.openNote,
+                          hintText: myData.text != "" ? myData.text : TTexts.openNote,
                         ),
                       ),
                   ],
@@ -305,7 +316,7 @@ class _AddNoteScreen extends State<AddNoteScreen>{
                         GestureDetector(
                               onTap: () {
                                 // Action lorsque le premier widget est tapé
-                                print(texte);
+                                
                               },
                               child: Container(
                                 height: 50,
