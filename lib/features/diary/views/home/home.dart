@@ -1,3 +1,5 @@
+import 'package:daylio/features/diary/views/home/widgets/home_appbar.dart';
+import 'package:daylio/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -5,13 +7,14 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    final darkMode = THelperFunctions.isDarkMode(context);
+
+    return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
             // Text
-            SizedBox(height: 400),
-            Center(child: Text('Home Screen')),
+            THomeAppBar(darkMode: darkMode),
           ],
         ),
       ),
