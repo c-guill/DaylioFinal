@@ -4,13 +4,14 @@ import 'package:daylio/utils/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
-
 import 'common/widgets/shared_preferences/manage_data.dart';
+import 'features/authentication/views/pin_biometric/security_pin_biometric.dart';
 
 class App extends StatelessWidget {
-  const App({super.key, required this.initialThemeMode});
+  const App({super.key, required this.initialThemeMode, required this.UID});
 
   final ThemeMode initialThemeMode;
+  final String UID;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +35,7 @@ class App extends StatelessWidget {
               // This ensures that the textScaleFactor is always 1.0, no matter the system settings
               final MediaQueryData data = MediaQuery.of(context);
               return MediaQuery(
-                data: data.copyWith(textScaler: const TextScaler.linear(1.0)),
+                data: data.copyWith(textScaleFactor: 1.0),
                 child: child!,
               );
             },
@@ -45,8 +46,8 @@ class App extends StatelessWidget {
                   // Remove the native splash screen now that our initialization is complete
                   FlutterNativeSplash.remove();
 
-                  // Once images are loaded, show the onboarding screen
-                  return const OnBoardingScreen();
+                  // Once images are loaded, show the right screen
+                  return UID == "" ? const OnBoardingScreen() : const SecurityPinBiometricScreen();
                 } else if (snapshot.hasError) {
                   // Ideally handle initialization errors here
                   FlutterNativeSplash.remove(); // Ensure splash screen is removed even on error
@@ -64,7 +65,7 @@ class App extends StatelessWidget {
   }
 
   Future<void> preloadImages(BuildContext context) async {
-    // Preload somme images here:
+    // Preload some images here:
     await precacheImage(const AssetImage('assets/images/on_boarding_images/Diary-amico.png'), context);
     await precacheImage(const AssetImage('assets/images/on_boarding_images/Fingerprint-bro.png'), context);
     await precacheImage(const AssetImage('assets/images/on_boarding_images/Investment-data-amico.png'), context);

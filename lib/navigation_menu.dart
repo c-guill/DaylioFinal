@@ -56,11 +56,11 @@ class NavigationMenu extends StatelessWidget {
                   label: 'Home',
                   selectedIcon: const Icon(Iconsax.home_2, color: TColors.primary),
                 ),
-                NavigationDestination(
-                  icon: Icon(Iconsax.graph, color: darkMode ? TColors.iconPrimaryDark : TColors.iconPrimaryLight, size: 24),
-                  label: 'Stat',
-                  selectedIcon: const Icon(Iconsax.graph, color: TColors.primary),
-                ),
+                // NavigationDestination(
+                //   icon: Icon(Iconsax.graph, color: darkMode ? TColors.iconPrimaryDark : TColors.iconPrimaryLight, size: 24),
+                //   label: 'Stat',
+                //   selectedIcon: const Icon(Iconsax.graph, color: TColors.primary),
+                // ),
                 NavigationDestination(
                   icon: Icon(Iconsax.calendar_1, color: darkMode ? TColors.iconPrimaryDark : TColors.iconPrimaryLight, size: 24),
                   label: 'Calendar',
@@ -91,7 +91,7 @@ class NavigationController extends GetxController {
 
   final screens = [
     const HomeScreen(),
-    const StatScreen(),
+    // const StatScreen(),
     const CalendarScreen(),
     WalletScreen(),
     const SettingsScreen(),

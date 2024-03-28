@@ -55,9 +55,15 @@ class ManageData {
     prefs.setString("uid", user.uid);
   }
 
-  Future<String> getUID() async {
+  void removeUID() async{
+    SharedPreferences prefs = await preferences;
+    prefs.setString("uid", "");
+  }
+
+  Future<String> getUID() async{
     SharedPreferences prefs = await preferences;
     String? uid = prefs.getString("uid");
     return uid ?? "";
   }
+
 }

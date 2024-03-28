@@ -12,6 +12,8 @@ Future<void> main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
 
   // Todo: Init Local Storage
+  final ManageData manageData = ManageData();
+
 
   // Todo: Await Native Splash
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
@@ -24,10 +26,8 @@ Future<void> main() async {
 
   // Todo: Initialize Authentication
 
-  // Load theme selection from ManageData
-  final manageData = ManageData();
+  String UID = await manageData.getUID();
   final themeMode = await manageData.getThemeMode();
 
-  // Initialize your app with the loaded theme
-  runApp(App(initialThemeMode: themeMode));
+  runApp(App(initialThemeMode: themeMode, UID: UID));
 }

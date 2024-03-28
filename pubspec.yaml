@@ -62,9 +62,11 @@ flutter:
     - assets/images/
     - assets/images/on_boarding_images/
     - assets/images/animations/
+    - assets/images/emoji/
     - assets/icons/
     - assets/fonts/
     - assets/logos/
+
   # LOCAL FONTS
   fonts:
     - family: Poppins

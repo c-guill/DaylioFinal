@@ -7,6 +7,7 @@ import 'package:daylio/utils/constants/text_strings.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../../../../common/widgets/shared_preferences/manage_data.dart';
@@ -121,10 +122,15 @@ class _TLoginFormState extends State<TLoginForm> {
     try{
       User? user = await _auth.signInWithEmailAndPassword(email, password);
       if(user != null) {
-        Get.to(() => const SecurityPinBiometricScreen(),
-            transition: Transition.downToUp);
-        showToast(message: TTexts.sucessfullogin);
-        manageData.setUID(user);
+        if(user.emailVerified){
+          Get.to(() => const SecurityPinBiometricScreen(),
+              transition: Transition.downToUp);
+          showToast(message: TTexts.sucessfullogin);
+          manageData.setUID(user);
+        }else {
+          showToast(message: "Your email address isn't verified, check your mailbox");
+          await user.sendEmailVerification();
+        }
       }
     } on FirebaseAuthException catch(e){
       showToast(message: _auth.getMessageError(e.code));
