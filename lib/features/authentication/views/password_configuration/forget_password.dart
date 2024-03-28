@@ -1,12 +1,31 @@
 import 'package:daylio/features/authentication/views/password_configuration/reset_password.dart';
 import 'package:daylio/utils/constants/sizes.dart';
 import 'package:daylio/utils/constants/text_strings.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
-class ForgetPassword extends StatelessWidget {
+import '../../controllers/firebase_auth_services.dart';
+
+class ForgetPassword extends StatefulWidget {
   const ForgetPassword({super.key});
+
+  @override
+  State<ForgetPassword> createState() => _ForgetPassword();
+}
+
+class _ForgetPassword extends State<ForgetPassword> {
+
+  final FirebaseAuthService _auth = FirebaseAuthService();
+
+  TextEditingController _emailController = TextEditingController();
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +46,7 @@ class ForgetPassword extends StatelessWidget {
 
             // Text Field
             TextFormField(
+              controller: _emailController,
               decoration: const InputDecoration(
                   labelText: TTexts.email,
                   prefixIcon: Icon(Iconsax.direct_right)),
@@ -37,7 +57,7 @@ class ForgetPassword extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () => Get.off(() => const ResetPassword()),
+                onPressed: _forgetPassword,
                 child: Text(TTexts.submit.capitalize!),
               ),
             ),
@@ -45,5 +65,15 @@ class ForgetPassword extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  _forgetPassword() async {
+    String email = _emailController.text;
+    try {
+      await _auth.sendPasswordResetEmail(email);
+      Get.off(() => ResetPassword(email: email,));
+    } on FirebaseAuthException catch(e){
+      print(e);
+    }
   }
 }

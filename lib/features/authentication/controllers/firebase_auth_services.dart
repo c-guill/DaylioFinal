@@ -40,6 +40,10 @@ class FirebaseAuthService {
         return TTexts.usernotfound;
       case 'wrong-password':
         return TTexts.wrongpassword;
+      case 'invalid-credential':
+        return TTexts.invalidcredential;
+      case 'channel-error':
+        return TTexts.emptyinformation;
       default:
         return code;
     }

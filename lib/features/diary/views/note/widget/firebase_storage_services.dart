@@ -54,7 +54,7 @@ class Storage {
   Future<void> addNote(Note note)async {
     try {
       Future<String> UID = manageData.getUID();
-      String date = DateFormat('ddMMyyyy').format(note.date);
+      String date = DateFormat('MMyyyy').format(note.date);
       UID.then((value) => {
       FirebaseFirestore.instance.collection(
       'users/$value/$date').add({
@@ -76,9 +76,8 @@ class Storage {
     try {
       List<Note> notes = [];
       String UID = await manageData.getUID();
-      String date = DateFormat('ddMMyyyy').format(dateTime);
+      String date = DateFormat('MMyyyy').format(dateTime);
       QuerySnapshot querySnapshot = await FirebaseFirestore.instance.collection('users/$UID/$date').get();
-
       for (var doc in querySnapshot.docs) {
        notes.add(Note(
           text: doc["text"],

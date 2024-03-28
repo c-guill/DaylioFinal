@@ -54,6 +54,8 @@ class TTexts {
   static const String usernotfound = "Unknown User";
   static const String wrongpassword = "Wrong password";
   static const String sucessfullogin = "Welcome back";
+  static const String invalidcredential = "Email or password incorrect";
+  static const String emptyinformation = "Please, fill up the forms";
 
 
   // -- Authentication Headings

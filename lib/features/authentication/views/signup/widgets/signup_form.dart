@@ -79,7 +79,7 @@ class _TSignupForm extends State<TSignupForm> {
             expands: false,
             decoration: const InputDecoration(
               labelText: TTexts.email,
-              prefixIcon: Icon(Iconsax.call),
+              prefixIcon: Icon(Iconsax.direct_right),
             ),
           ),
           const SizedBox(height: TSizes.spaceBtwInputFields),
@@ -88,6 +88,7 @@ class _TSignupForm extends State<TSignupForm> {
           TextFormField(
             controller: _passwordController,
             expands: false,
+            obscureText: _passwordHidden,
             decoration: InputDecoration(
               labelText: TTexts.password,
               prefixIcon: Icon(Iconsax.password_check),
@@ -102,8 +103,10 @@ class _TSignupForm extends State<TSignupForm> {
           TextFormField(
             controller: _passwordVerificationController,
             expands: false,
+            obscureText: _checkPasswordHidden,
             decoration: InputDecoration(
               labelText: TTexts.password,
+
               prefixIcon: Icon(Iconsax.password_check),
               suffixIcon: IconButton(onPressed: _changeVisibilitycheckPassword,
                   icon: _checkPasswordHidden ? Icon(Iconsax.eye) : Icon(
@@ -161,6 +164,7 @@ class _TSignupForm extends State<TSignupForm> {
       if (password.compareTo(passwordVerification) == 0) {
         User? user = await _auth.signUpWithEmailAndPassword(email, password);
         if(user != null) {
+          await user.sendEmailVerification();
           Get.to(() => const VerifyEmailScreen());
           manageData.setUID(user);
         }
