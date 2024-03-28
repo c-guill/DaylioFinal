@@ -5,8 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 
+import 'common/widgets/shared_preferences/manage_data.dart';
+import 'features/authentication/views/pin_biometric/security_pin_biometric.dart';
+
 class App extends StatelessWidget {
-  const App({super.key});
+  const App({super.key, required this.UID});
+
+  final String UID;
+  
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +38,8 @@ class App extends StatelessWidget {
             // Remove the native splash screen now that our initialization is complete
             FlutterNativeSplash.remove();
 
-            // Once images are loaded, show the onboarding screen
-            return const OnBoardingScreen();
+            // Once images are loaded, show the right screen
+            return UID == "" ? const OnBoardingScreen() : const SecurityPinBiometricScreen();
           } else if (snapshot.hasError) {
             // Ideally handle initialization errors here
             FlutterNativeSplash.remove(); // Ensure splash screen is removed even on error

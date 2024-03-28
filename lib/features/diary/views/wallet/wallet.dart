@@ -2,12 +2,16 @@ import 'package:daylio/common/widgets/basic_widget/toast.dart';
 import 'package:daylio/features/diary/views/note/widget/firebase_storage_services.dart';
 import 'package:daylio/features/diary/views/note/widget/note.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../common/widgets/shared_preferences/manage_data.dart';
 
 
 class WalletScreen extends StatelessWidget {
   WalletScreen({super.key});
   final Storage storage = Storage();
+  final ManageData manageData = ManageData();
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +23,13 @@ class WalletScreen extends StatelessWidget {
             // Text
             SizedBox(height: 400),
             Center(child: Text('Wallet Screen')),
+            ElevatedButton(
+              onPressed: () {
+                manageData.removeUID();
+                FirebaseAuth.instance.signOut();
+              },
+              child: Text('Log out'),
+            ),
             ElevatedButton(
               onPressed: () {
                  // storage.addNote(Note(text: "victor hugo page 142", emotion: 2, feeling: [2,4,5], image: ["image1","image2"], date: DateTime.now()));
