@@ -32,7 +32,7 @@ class WalletScreen extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                  // storage.addNote(Note(text: "victor hugo page 142", emotion: 2, feeling: [2,4,5], image: ["image1","image2"], date: DateTime.now()));
-                 storage.getNotes(DateTime.now());
+                 storage.getNotes(DateTime.now()).then((value) => print(value?.first.text));
               },
               child: Text('Insert Data into Firebase'),
             ),

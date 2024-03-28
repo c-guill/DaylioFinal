@@ -71,7 +71,7 @@ class Storage {
     }
   }
 
-  Future<Note?> getNotes(DateTime dateTime) async {
+  Future<List<Note>?> getNotes(DateTime dateTime) async {
     try {
       List<Note> notes = [];
       String UID = await manageData.getUID();
@@ -86,6 +86,7 @@ class Storage {
           feeling: doc["feeling"]
         ));
       }
+      return notes;
 
     }catch (e){
       print("An error occured, please try again $e");
