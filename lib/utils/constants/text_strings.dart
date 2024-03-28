@@ -77,6 +77,18 @@ class TTexts {
   static const String homeAppbarTitle = "Good day for shopping";
   static const String homeAppbarSubTitle = "Taimoor Sikander";
 
-
+  // -- Settings
+  static const String account = "Account";
+  static const String personalDetails = "Personal details";
+  static const String permissions = "Permissions";
+  static const String notifications = "Notifications";
+  static const String locationSettings = "Location settings";
+  static const String security = "Security";
+  static const String faceLock = "Face lock";
+  static const String securityPin = "Security PIN";
+  static const String intruderSelfie = "Intruder selfie";
+  static const String other = "Other";
+  static const String help = "Help";
+  static const String logout = "Logout";
 }
 
