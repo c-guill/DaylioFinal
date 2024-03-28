@@ -5,7 +5,6 @@ import 'package:daylio/features/diary/views/settings/widgets/security_container.
 import 'package:daylio/utils/constants/sizes.dart';
 import 'package:daylio/common/styles/spacing_styles.dart';
 import 'package:flutter/material.dart';
-import 'package:daylio/utils/helpers/helper_functions.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
