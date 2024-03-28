@@ -28,7 +28,7 @@ class Storage {
 
       try {
         await storage.ref('$UID/$date/$fileName').putFile(file);
-      } on firebase_core.FirebaseException catch(){
+      } on firebase_core.FirebaseException catch(e){
         showToast(message: "A problem occured, please try again");
       }
   }
