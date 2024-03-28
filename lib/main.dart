@@ -4,6 +4,7 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 import 'app.dart';
 import 'common/widgets/shared_preferences/manage_data.dart';
+import 'app.dart';
 import 'firebase_options.dart';
 
 /// ------ Entry point of Flutter App ------

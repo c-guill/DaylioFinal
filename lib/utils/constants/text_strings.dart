@@ -82,6 +82,18 @@ class TTexts {
   static const String homeAppbarTitle = "Good day for shopping";
   static const String homeAppbarSubTitle = "Taimoor Sikander";
 
+  // -- Note
+  static const String feeling = "How do you feel now ?";
+  static const String emotions = "Emotions";
+  static const String note = "Quick Note";
+  static const String openNote = "Open full";
+  static const String photo = "Take Photo"; 
+  static const String gallery = "From Gallery";
+  static const String voice = "Voice Memo";
+  static const String write = "Write a Note";
+  static const String record = "Tap to record";
+  static const String photos = "Photo";
+
 
 }
 
