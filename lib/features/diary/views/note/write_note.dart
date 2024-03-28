@@ -1,4 +1,4 @@
-import 'package:daylio/features/diary/views/note/noteData.dart';
+import 'package:daylio/features/diary/views/note/widget/note.dart';
 import 'package:flutter/material.dart';
 
 class WriteNoteScreen extends StatelessWidget {
@@ -9,7 +9,7 @@ class WriteNoteScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String noteText = ''; 
+    String noteText = myData.text; 
 
     return Scaffold(
       appBar: AppBar(

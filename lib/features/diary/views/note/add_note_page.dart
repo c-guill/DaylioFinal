@@ -1,9 +1,19 @@
+import 'dart:io';
+
+import 'package:daylio/common/styles/spacing_styles.dart';
 import 'package:daylio/common/widgets/basic_widget/container.dart';
-import 'package:daylio/features/diary/views/note/noteData.dart';
+import 'package:daylio/common/widgets/basic_widget/toast.dart';
+import 'package:daylio/features/authentication/views/pin_biometric/security_pin_biometric.dart';
+import 'package:daylio/features/diary/views/home/home.dart';
+import 'package:daylio/features/diary/views/note/widget/note.dart';
+import 'package:daylio/features/diary/views/note/widget/firebase_storage_services.dart';
 import 'package:daylio/utils/constants/colors.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:daylio/features/diary/views/note/write_note.dart'; 
 import 'package:daylio/utils/constants/text_strings.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 
 class AddNoteScreen extends StatefulWidget {
@@ -14,7 +24,9 @@ class AddNoteScreen extends StatefulWidget {
 }
 
 class _AddNoteScreen extends State<AddNoteScreen>{
+  final Storage storage = Storage();
   bool tap = false;
+  List<String> imagePath = [];
   Map<String, bool> tapStates = {
     'very_sad_b.png': false,
     'sad_b.png': false,
@@ -37,12 +49,13 @@ class _AddNoteScreen extends State<AddNoteScreen>{
     'anxious_b.png': false,
   };
   Note myData = Note(
-    text: '',
+    text: "",
     emotion: 0,
     feeling: [],
     image: [],
     date: DateTime.now()
   );
+  final TextEditingController _textFieldController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -50,17 +63,14 @@ class _AddNoteScreen extends State<AddNoteScreen>{
   String formattedDate = '${now.year}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}';
 
   return Scaffold(
-    appBar: AppBar(
-        actions: [
-          IconButton(
-            icon: Icon(Icons.close), // Utiliser l'icône de fermeture
-            onPressed: () {
-              Navigator.pop(context); // Fermer l'écran actuel
-            },
-          ),
-        ],
-      ),
-    body: Column(
+    
+    body: SingleChildScrollView(
+      
+      child :
+      Padding(
+          padding: TSpacingStyles.paddingWithAppBarHeight, // without appBar 
+          
+       child :Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Row(
@@ -78,10 +88,10 @@ class _AddNoteScreen extends State<AddNoteScreen>{
           children: [
             Expanded(
               child: FractionallySizedBox(
-              widthFactor: 0.8,
+              widthFactor: 1,
               child: ContainerCustom(
                 height: 100,
-                width: double.infinity,
+
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -89,7 +99,7 @@ class _AddNoteScreen extends State<AddNoteScreen>{
                       TTexts.feeling, // Texte
                       style: TextStyle(color: TColors.iconPrimaryLight , fontSize: 16),
                     ),
-                    SizedBox(width: 10),
+                    SizedBox(height: 10),
                     Expanded(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -114,10 +124,9 @@ class _AddNoteScreen extends State<AddNoteScreen>{
           children: [
             Expanded(
               child: FractionallySizedBox(
-              widthFactor: 0.8,
+              widthFactor: 1,
               child:ContainerCustom(
                 height: 290,
-                width: double.infinity,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -160,41 +169,52 @@ class _AddNoteScreen extends State<AddNoteScreen>{
           children: [
             Expanded(
               child: FractionallySizedBox(
-              widthFactor: 0.8,
+              widthFactor: 1,
               child: ContainerCustom(
-                height: 100,
-                width: double.infinity,
+                height: 120,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Text(
-                      TTexts.note, // Texte
-                      style: TextStyle(color: TColors.iconPrimaryLight , fontSize: 16),
-                    ),
-                    GestureDetector(
-                      onTap: () async {
-                        String? result = await Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => WriteNoteScreen(myData: myData)), 
-                        );
-                        if (result != null) {
-                          myData.text = result;
-                        }
-                      },
-                      child: Text(
-                        TTexts.openNote,
-                        style: TextStyle(
-                          color: Colors.blue, 
-                          decoration: TextDecoration.underline, 
+                    Row(
+            children: [
+              Expanded(
+                child: Text(
+                  TTexts.note,
+                  textAlign: TextAlign.left,
+                ),
+              ),
+              Expanded(
+                child: GestureDetector(
+                        onTap: () async {
+                          myData.text = _textFieldController.text;
+                          String? result = await Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => WriteNoteScreen(myData: myData)), 
+                          );
+                          if (result != null) {
+                            myData.text = result;
+                            _textFieldController.text = result;
+                          }
+                        },
+                        child: Text(
+                          TTexts.openNote,
+                          textAlign: TextAlign.right,
+                          style: TextStyle(
+                            color: Colors.blue, 
+                            decoration: TextDecoration.underline, 
+                          ),
                         ),
                       ),
-                    ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 10),
                     TextField(
-                      enabled: false,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          hintText: myData.text != "" ? myData.text : TTexts.openNote,
-                        ),
+                      controller: _textFieldController,
+                      decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      hintText: myData.text != "" ? "" : TTexts.write,
+                      ),
                       ),
                   ],
                 ),
@@ -209,10 +229,9 @@ class _AddNoteScreen extends State<AddNoteScreen>{
           children: [
             Expanded(
               child: FractionallySizedBox(
-              widthFactor: 0.8,
+              widthFactor: 1,
               child: ContainerCustom(
-                height: 100,
-                width: double.infinity,
+                height: 200,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -229,7 +248,6 @@ class _AddNoteScreen extends State<AddNoteScreen>{
                               // Action lorsque le premier widget est tapé
                             },
                             child: Container(
-                              
                               height: 45,
                               width: 141,
                               decoration: BoxDecoration(
@@ -253,11 +271,35 @@ class _AddNoteScreen extends State<AddNoteScreen>{
                               ),
                               ),
                             ),
-                            SizedBox(width: 20),
-                            GestureDetector(
-                            onTap: () {
-                              // Action lorsque le premier widget est tapé
-                            },
+                          SizedBox(width: 20),
+                          GestureDetector(
+                            onTap: () async {
+                              final results = await FilePicker.platform.pickFiles(
+                                  allowMultiple: false,
+                                  type: FileType.custom,
+                                  allowedExtensions: ['png','jpg','jpeg']
+                              );
+                              if(results == null){
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(content: Text('no file selected.')));
+                                return;
+                              }
+                              final path = results.files.single.path ?? '';
+                              final fileName = results.files.single.name;
+                              myData.image.add(fileName);
+                              imagePath.add(path);
+                              print(imagePath.isNotEmpty);
+                              storage.uploadFile(path, fileName).then((value) => showToast(message: "The image has been uploaded"));
+                              /*imagePath.isNotEmpty
+                              ? Image.file(
+                                  File(imagePath[0]),
+                                  width: 120, 
+                                  height: 120, 
+                                  fit: BoxFit.cover, 
+                                )
+                              : Container();*/
+                          },
+                          
                             child: Container(
                               height: 45,
                               width: 141,
@@ -265,7 +307,7 @@ class _AddNoteScreen extends State<AddNoteScreen>{
                                 color: TColors.softGrey,
                                 borderRadius: BorderRadius.circular(10),
                               ),
-                              child: Row(
+                              child: const Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Icon(Icons.camera_alt, color: TColors.primary),
@@ -290,62 +332,64 @@ class _AddNoteScreen extends State<AddNoteScreen>{
               ),
               ),
             ),
+            
           ],
         ),
+        /*myData.image.isNotEmpty
+        ? FutureBuilder(
+          future: storage.downloadURL(myData.image[0]),
+          builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+            if(snapshot.connectionState == ConnectionState.done && snapshot.hasData) {
+              return Container(width: 300, height: 250, child: Image.network(snapshot.data!, fit: BoxFit.cover));
+            }
+            if(snapshot.connectionState == ConnectionState.waiting || !snapshot.hasData){
+              return CircularProgressIndicator();
+            }
+            return Container();
+          }
+          ) :Container(),*/
         SizedBox(height: 15),
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Expanded(
-              child: FractionallySizedBox(
-              widthFactor: 0.8,
-              child: ContainerCustom(
-                height: 100,
-                width: double.infinity,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(
-                      TTexts.voice, 
-                      style: TextStyle(color: TColors.iconPrimaryLight, fontSize: 16),
-                    ),
-                    Expanded(  
-                      child : Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [ 
-                        GestureDetector(
-                              onTap: () {
-                                // Action lorsque le premier widget est tapé
-                                
-                              },
-                              child: Container(
-                                height: 50,
-                                width: 303,
-                                decoration: BoxDecoration(
-                                  color: TColors.softGrey,
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Icon(Icons.keyboard_voice_rounded, color: TColors.primary),
-                                    SizedBox(width: 5),
-                                    Text(
-                                      TTexts.record,
-                                      style: TextStyle(
-                                        color: TColors.primary,
-                                        fontWeight: FontWeight.bold, 
-                                        fontSize: 12, 
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                ),
-                              ),
-                            ], 
-                      ),
-                    ),
-                  ],
+              child:GestureDetector(
+              onTap: () {
+                // Action lorsque le premier widget est tapé
+                if (myData.text.isEmpty){
+                  myData.text = _textFieldController.text;
+                }
+                int i = 0;
+                int j = 0;
+                for (var key in tapStates.keys) {
+                  if (tapStates[key] != false){
+                    myData.emotion = i;
+                  }
+                  i+=1;
+                }
+                for (var key in tapStates2.keys) {
+                  if (tapStates2[key] != false){
+                    myData.feeling.add(j);
+                  }
+                  j+=1;
+                }
+                print(myData.image);
+                storage.addNote(myData); 
+                Get.back();
+              ; 
+              },
+              child: Container(
+                width: 60,
+                height: 60,
+                child: 
+                  Icon(
+                  Icons.done,
+                  color: Colors.white,
+                  size: 40, // Taille de l'icône
+                ),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: TColors.emojiContainer.withOpacity(0.5),
                 ),
               ),
               ),
@@ -354,6 +398,7 @@ class _AddNoteScreen extends State<AddNoteScreen>{
         ),
       ],
     ),
+    ),),
   );
   }
 

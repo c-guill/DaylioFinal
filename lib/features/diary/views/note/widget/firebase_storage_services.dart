@@ -22,10 +22,13 @@ class Storage {
     String filePath,
     String fileName,
       ) async {
+      String UID = await manageData.getUID();
       File file = File(filePath);
+      String date = DateFormat('ddMMyyyy').format(DateTime.now());
+
 
       try {
-        await storage.ref('test/$fileName').putFile(file);
+        await storage.ref('$UID/$date/$fileName').putFile(file);
       } on firebase_core.FirebaseException catch(e){
         showToast(message: "A problem occured, please try again");
       }
