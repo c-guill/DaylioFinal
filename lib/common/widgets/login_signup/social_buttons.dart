@@ -59,7 +59,7 @@ class TSocialButtons extends StatelessWidget {
 
         UserCredential user = await _firebaseAuth.signInWithCredential(credential);
         if(user.user != null) {
-          Get.to(() => const SecurityPinBiometricScreen(),
+          Get.to(() => const SecurityPinBiometricScreen(setPin: true,),
               transition: Transition.downToUp);
           showToast(message: TTexts.sucessfullogin);
           manageData.setUID(user.user!);
