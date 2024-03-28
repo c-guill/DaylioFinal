@@ -8,7 +8,6 @@ import 'package:iconsax/iconsax.dart';
 
 class PermissionsContainer extends StatelessWidget {
   const PermissionsContainer({super.key});
-
   @override
   Widget build(BuildContext context) {
     final bool darkMode = THelperFunctions.isDarkMode(context);

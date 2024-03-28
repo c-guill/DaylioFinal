@@ -6,8 +6,7 @@ import 'package:daylio/utils/constants/text_strings.dart';
 class PersonalDataForm extends StatefulWidget {
   const PersonalDataForm({super.key});
   @override
-  State<PersonalDataForm> createState() =>
-      _PersonalDataFormState();
+  State<PersonalDataForm> createState() => _PersonalDataFormState();
 }
 
 class _PersonalDataFormState extends State<PersonalDataForm> {
@@ -18,7 +17,7 @@ class _PersonalDataFormState extends State<PersonalDataForm> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView( // Wrap with SingleChildScrollView
+    return SingleChildScrollView(
       child: Form(
         key: _formKey,
         child: Column(
@@ -70,7 +69,6 @@ class _PersonalDataFormState extends State<PersonalDataForm> {
               },
               child: const Text(TTexts.save),
             ),
-            const SizedBox(height: 50), // Add extra space at the bottom for better scrolling
           ],
         ),
       ),

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 import 'app.dart';
+import 'common/widgets/shared_preferences/manage_data.dart';
 import 'firebase_options.dart';
 
 /// ------ Entry point of Flutter App ------
@@ -23,5 +24,10 @@ Future<void> main() async {
 
   // Todo: Initialize Authentication
 
-  runApp(const App());
+  // Load theme selection from ManageData
+  final manageData = ManageData();
+  final themeMode = await manageData.getThemeMode();
+
+  // Initialize your app with the loaded theme
+  runApp(App(initialThemeMode: themeMode));
 }
