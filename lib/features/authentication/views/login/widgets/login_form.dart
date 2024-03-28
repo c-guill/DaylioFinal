@@ -1,3 +1,4 @@
+import 'package:daylio/common/widgets/basic_widget/toast.dart';
 import 'package:daylio/features/authentication/views/password_configuration/forget_password.dart';
 import 'package:daylio/features/authentication/views/signup/signup.dart';
 import 'package:daylio/features/authentication/views/pin_biometric/security_pin_biometric.dart';
@@ -40,8 +41,6 @@ class _TLoginFormState extends State<TLoginForm> {
 
   @override
   Widget build(BuildContext context) {
-    final PasswordController passwordController = Get.put(PasswordController());
-
     return Form(
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: TSizes.spaceBtwSections),
@@ -68,19 +67,6 @@ class _TLoginFormState extends State<TLoginForm> {
               ),
 
             ),
-            Obx(() => TextFormField(
-              obscureText: !passwordController.isPasswordVisible.value,
-              decoration: InputDecoration(
-                prefixIcon: const Icon(Iconsax.password_check),
-                labelText: 'Password', // Replace with your label text variable
-                suffixIcon: IconButton(
-                  icon: Icon(
-                    passwordController.isPasswordVisible.value ? Iconsax.eye_slash : Iconsax.eye,
-                  ),
-                  onPressed: passwordController.togglePasswordVisibility,
-                ),
-              ),
-            )),
             const SizedBox(height: TSizes.spaceBtwInputFields / 2),
 
             // Remember Me & Forgot Password
@@ -102,23 +88,52 @@ class _TLoginFormState extends State<TLoginForm> {
             const SizedBox(height: TSizes.defaultSpace),
 
             // Sign In Button
-            SizedBox(width: double.infinity, child: ElevatedButton(onPressed: () => Get.to(() => const SecurityPinBiometricScreen(), transition: Transition.downToUp), child: const Text(TTexts.signIn))),
+            SizedBox(width: double.infinity, child: ElevatedButton(onPressed: _signIn, child: _isSigning ? CircularProgressIndicator(color: Colors.white,) : const Text(TTexts.signIn))),
             const SizedBox(height: TSizes.spaceBtwItems),
 
             // Create Account Text
             SizedBox(width: double.infinity, child: OutlinedButton(onPressed: () => Get.to(() => const SignupScreen()), child: const Text(TTexts.createAccount))),
-            /*Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text(TTexts.signupDontHaveAccount),
-                TextButton(
-                  onPressed: () {},
-                  child: const Text(TTexts.signUp, style: TextStyle(decoration: TextDecoration.underline, fontSize: TSizes.fontSizeSm))),
-              ],
-            ),*/
+
           ],
         ),
       ),
     );
   }
+
+  void _changeVisibilityPassword() {
+    setState(() {
+      if (_passwordHidden) {
+        _passwordHidden = false;
+      } else {
+        _passwordHidden = true;
+      }
+    });
+  }
+
+  void _signIn() async {
+    setState(() {
+      _isSigning = true;
+    });
+
+    String email = _emailController.text;
+    String password = _passwordController.text;
+
+    try{
+      User? user = await _auth.signInWithEmailAndPassword(email, password);
+      if(user != null) {
+        Get.to(() => const SecurityPinBiometricScreen(),
+            transition: Transition.downToUp);
+        showToast(message: TTexts.sucessfullogin);
+        manageData.setUID(user);
+      }
+    } on FirebaseAuthException catch(e){
+      showToast(message: _auth.getMessageError(e.code));
+    }
+
+    setState(() {
+      _isSigning = false;
+    });
+
+  }
+
 }
