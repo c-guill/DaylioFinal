@@ -24,6 +24,7 @@ class AddNoteScreen extends StatefulWidget {
 }
 
 class _AddNoteScreen extends State<AddNoteScreen>{
+  double heightPhoto = 141;
   final Storage storage = Storage();
   bool tap = false;
   List<String> imagePath = [];
@@ -231,7 +232,7 @@ class _AddNoteScreen extends State<AddNoteScreen>{
               child: FractionallySizedBox(
               widthFactor: 1,
               child: ContainerCustom(
-                height: 200,
+                height: heightPhoto,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -287,19 +288,12 @@ class _AddNoteScreen extends State<AddNoteScreen>{
                               final path = results.files.single.path ?? '';
                               final fileName = results.files.single.name;
                               myData.image.add(fileName);
-                              imagePath.add(path);
-                              print(imagePath.isNotEmpty);
+                              setState(() {
+                                imagePath.add(path);
+                              });
+                              heightPhoto = 250;
                               storage.uploadFile(path, fileName).then((value) => showToast(message: "The image has been uploaded"));
-                              /*imagePath.isNotEmpty
-                              ? Image.file(
-                                  File(imagePath[0]),
-                                  width: 120, 
-                                  height: 120, 
-                                  fit: BoxFit.cover, 
-                                )
-                              : Container();*/
                           },
-                          
                             child: Container(
                               height: 45,
                               width: 141,
@@ -326,6 +320,18 @@ class _AddNoteScreen extends State<AddNoteScreen>{
                             ),
                         ],
                       ),
+                    ),
+                    Row(
+                      children: [
+                        SizedBox(height: 50,),
+                        for (var image in imagePath)
+                        Image.file(
+                              File(image),
+                              width: 100, 
+                              height: 100, 
+                              fit: BoxFit.cover, 
+                            )
+                      ],
                     ),
                   ],
                 ),
