@@ -51,6 +51,9 @@ class TTexts {
   static const String enterCodePin = "Enter Your Pin";
   static const String enterCodePinSubTitle = "Login with PIN Code or Face ID";
   static const String biometricAuthSubTitle = "Always secure your app with biometric authentication";
+  static const String usernotfound = "Unknown User";
+  static const String wrongpassword = "Wrong password";
+  static const String sucessfullogin = "Welcome back";
 
 
   // -- Authentication Headings
