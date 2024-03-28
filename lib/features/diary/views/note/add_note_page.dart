@@ -1,10 +1,6 @@
-import 'dart:io';
-
 import 'package:daylio/common/styles/spacing_styles.dart';
 import 'package:daylio/common/widgets/basic_widget/container.dart';
 import 'package:daylio/common/widgets/basic_widget/toast.dart';
-import 'package:daylio/features/authentication/views/pin_biometric/security_pin_biometric.dart';
-import 'package:daylio/features/diary/views/home/home.dart';
 import 'package:daylio/features/diary/views/note/widget/note.dart';
 import 'package:daylio/features/diary/views/note/widget/firebase_storage_services.dart';
 import 'package:daylio/utils/constants/colors.dart';

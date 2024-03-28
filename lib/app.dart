@@ -35,7 +35,7 @@ class App extends StatelessWidget {
               // This ensures that the textScaleFactor is always 1.0, no matter the system settings
               final MediaQueryData data = MediaQuery.of(context);
               return MediaQuery(
-                data: data.copyWith(textScaleFactor: 1.0),
+                data: data.copyWith(textScaler: const TextScaler.linear(1.0)),
                 child: child!,
               );
             },

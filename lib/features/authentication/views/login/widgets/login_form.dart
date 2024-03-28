@@ -7,7 +7,6 @@ import 'package:daylio/utils/constants/text_strings.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../../../../common/widgets/shared_preferences/manage_data.dart';

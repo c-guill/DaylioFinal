@@ -1,5 +1,4 @@
 import 'package:daylio/features/diary/views/calendar/calendar.dart';
-import 'package:daylio/features/diary/views/graph/stat.dart';
 import 'package:daylio/features/diary/views/home/home.dart';
 import 'package:daylio/features/diary/views/settings/settings.dart';
 import 'package:daylio/features/diary/views/wallet/wallet.dart';
