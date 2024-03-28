@@ -1,3 +1,4 @@
+import 'package:daylio/features/authentication/controllers/login/password_controller.dart';
 import 'package:daylio/features/authentication/views/signup/verify_email.dart';
 import 'package:daylio/features/authentication/views/signup/widgets/terms_conditions_checkbox.dart';
 import 'package:daylio/utils/constants/sizes.dart';
