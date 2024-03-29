@@ -65,11 +65,11 @@ class NavigationMenu extends StatelessWidget {
                   label: 'Calendar',
                   selectedIcon: const Icon(Iconsax.calendar_1, color: TColors.primary),
                 ),
-                NavigationDestination(
-                  icon: Icon(Iconsax.wallet_2, color: darkMode ? TColors.iconPrimaryDark : TColors.iconPrimaryLight, size: 24),
-                  label: 'Wallet',
-                  selectedIcon: const Icon(Iconsax.wallet_2, color: TColors.primary),
-                ),
+                // NavigationDestination(
+                //   icon: Icon(Iconsax.wallet_2, color: darkMode ? TColors.iconPrimaryDark : TColors.iconPrimaryLight, size: 24),
+                //   label: 'Wallet',
+                //   selectedIcon: const Icon(Iconsax.wallet_2, color: TColors.primary),
+                // ),
                 NavigationDestination(
                   icon: Icon(Iconsax.setting_2, color: darkMode ? TColors.iconPrimaryDark : TColors.iconPrimaryLight, size: 24),
                   label: 'Settings',
@@ -92,7 +92,7 @@ class NavigationController extends GetxController {
     const HomeScreen(),
     // const StatScreen(),
     const CalendarScreen(),
-    WalletScreen(),
+    // WalletScreen(),
     const SettingsScreen(),
   ];
 }
