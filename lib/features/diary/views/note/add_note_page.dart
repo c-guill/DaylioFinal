@@ -14,6 +14,8 @@ import 'package:daylio/features/diary/views/note/write_note.dart';
 import 'package:daylio/utils/constants/text_strings.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:image_picker/image_picker.dart';
+
 
 
 class AddNoteScreen extends StatefulWidget {
@@ -28,6 +30,7 @@ class _AddNoteScreen extends State<AddNoteScreen>{
   final Storage storage = Storage();
   bool tap = false;
   List<String> imagePath = [];
+  final ImagePicker _picker = ImagePicker();
   Map<String, bool> tapStates = {
     'very_sad_b.png': false,
     'sad_b.png': false,
@@ -244,9 +247,22 @@ class _AddNoteScreen extends State<AddNoteScreen>{
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           GestureDetector(
-                            onTap: () {
-                              // Action lorsque le premier widget est tapé
-                            },
+                            onTap: () async {
+                            final pickedFile = await _picker.pickImage(source: ImageSource.camera); // Utiliser pickImage() au lieu de getImage()
+                            if(pickedFile == null){
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(content: Text('no file selected.')));
+                                return;
+                              }
+                            final String path = pickedFile.path;
+                            final String fileName = pickedFile.name;
+                            myData.image.add(fileName);
+                            setState(() {
+                              imagePath.add(path);
+                            });
+                            heightPhoto = 250;
+                            storage.uploadFile(path, fileName).then((value) => showToast(message: "The image has been uploaded"));
+                          },
                             child: Expanded( 
                               child :Container(
                               height: 40,
@@ -333,7 +349,7 @@ class _AddNoteScreen extends State<AddNoteScreen>{
                               height: 100, 
                               fit: BoxFit.cover, 
                             ),
-                        SizedBox(width: 50,)
+                        
                       ],
                     ),
                     ),
