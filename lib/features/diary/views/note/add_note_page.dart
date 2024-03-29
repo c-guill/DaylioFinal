@@ -77,7 +77,7 @@ class _AddNoteScreen extends State<AddNoteScreen>{
                 formattedDate,
                 style: TextStyle(color: TColors.iconPrimaryLight ),
             ),
-            Icon(Icons.edit, color: TColors.iconPrimaryLight ), // Logo crayon
+            //Icon(Icons.edit, color: TColors.iconPrimaryLight ), // Logo crayon
           ],
         ),
         SizedBox(height: 20),
@@ -417,14 +417,14 @@ class _AddNoteScreen extends State<AddNoteScreen>{
       child: tapStates[imageName] == true ? 
           Image.asset(
             'assets/images/emoji/${imageName.replaceAll("_b", "")}', 
-            height: 60,
-            width: 60,
+            height: 40,
+            width: 40,
           ) 
           : 
           Image.asset(
             'assets/images/emoji/$imageName', 
-            height: 60,
-            width: 60,
+            height: 40,
+            width: 40,
           ),
     );
   }
@@ -440,8 +440,8 @@ class _AddNoteScreen extends State<AddNoteScreen>{
       alignment: Alignment.center,
       children: [
         Container(
-          width: 60,
-          height: 60,
+          width: 55,
+          height: 55,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             color: tapStates2[imageName] == true ?  TColors.emojiContainer.withOpacity(0.5) : TColors.emojiContainer.withOpacity(0.5),
@@ -452,8 +452,8 @@ class _AddNoteScreen extends State<AddNoteScreen>{
               'assets/images/emoji/${imageName.replaceAll("_b", "")}' 
               : 
               'assets/images/emoji/$imageName', 
-          height: 50,
-          width: 50,
+          height: 45,
+          width: 45,
         ),
       ],
     ),
