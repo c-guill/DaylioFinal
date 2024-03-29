@@ -14,10 +14,12 @@ class TColors {
   );
 
   // Text colors
-  static const Color textPrimary = Color(0xFF333333);
+  static Color textPrimary = const Color(0xFF000000).withOpacity(0.5);
   static const Color textSecondary = Color(0xFF6C757D);
   static const Color textWhite = Colors.white;
   static const Color textBlack = Colors.black;
+  static Color textDarkTheme = const Color(0xFFFFFFFF).withOpacity(0.8);
+  static Color textLightTheme = const Color(0xFF000000).withOpacity(0.8);
 
   // Foreground colors
   static const Color light = Color(0xFFF6F6F6);
@@ -27,6 +29,13 @@ class TColors {
   // Icon colors
   static Color iconPrimaryLight = Colors.black.withOpacity(0.5);
   static Color iconPrimaryDark = Colors.white.withOpacity(0.5);
+
+  // Chart Graph colors
+  static const Color chartRad = Color(0xFFF9B952);
+  static const Color chartGood = Color(0xFFFFD664);
+  static const Color chartMeh = Color(0xFF3AC770);
+  static const Color chartBad = Color(0xFFD0E7F7);
+  static const Color chartAwful = Color(0xFF7DBDFC);
 
   // Background Container colors
   static const Color lightContainer = Color(0xFFF6F6F6); // F3F3F3

@@ -89,6 +89,22 @@ class TSizes {
   static const double dotSpacing = 20.0;
   static const double dotRadius = 50.0;
   static const double dotFullWidth = 150;
+
+  // Date picker size
+  static const double datePickerHeight = 100.0;
+  static const double datePickerBorderWidth = 2.0;
+  static const double datePickerBorderRadius = 10.0;
+
+  // Mood calendar size
+  static const double moodCalendarHeight = 330.0;
+
+  // Mood chart size
+  static const double moodChartHeight = 270.0;
+  static const double moodChartWidth = 16.0;
+  static const double moodChartRadius = 10.0;
+  static const double moodChartElevation = 8.0;
+  static const double moodChartSpaceDomainLine = 15.0;
+  static const double moodChartSpaceBetweenItem = 28.0;
 }
 
 

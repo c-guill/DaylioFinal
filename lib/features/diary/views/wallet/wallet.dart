@@ -1,19 +1,13 @@
 import 'package:daylio/common/widgets/basic_widget/toast.dart';
-import 'package:daylio/features/authentication/views/login/login.dart';
 import 'package:daylio/features/diary/views/note/widget/firebase_storage_services.dart';
+import 'package:daylio/features/diary/views/note/widget/note.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-
-import '../../../../common/widgets/shared_preferences/manage_data.dart';
 
 
 class WalletScreen extends StatelessWidget {
   WalletScreen({super.key});
   final Storage storage = Storage();
-  final ManageData manageData = ManageData();
 
   @override
   Widget build(BuildContext context) {
@@ -27,16 +21,21 @@ class WalletScreen extends StatelessWidget {
             Center(child: Text('Wallet Screen')),
             ElevatedButton(
               onPressed: () {
-                manageData.removeUID();
-                FirebaseAuth.instance.signOut();
-                Get.offAll(() => LoginScreen(), transition: Transition.rightToLeft);
-              },
-              child: Text('Log out'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                 // storage.addNote(Note(text: "victor hugo page 142", emotion: 2, feeling: [2,4,5], image: ["image1","image2"], date: DateTime.now()));
-                 storage.getNotes(DateTime.now()).then((value) => print(value?.first.text));
+                  // storage.addNote(Note(text: "victor hugo page 142", emotion: 2, feeling: [2,4,5], image: ["image1","image2"], date: DateTime.now()));
+                 //storage.getNotes(DateTime.fromMillisecondsSinceEpoch(1711620000));
+                storage.getNotes(DateTime.utc(2024, 02, 01)).then((notes) {
+                  if (notes != null) {
+                    for (var note in notes) {
+                      print(note.text);
+                    }
+                  } else {
+                    print('No notes available.');
+                  }
+                }).catchError((e) {
+                  print('Error fetching notes: $e');
+                });
+
+
               },
               child: Text('Insert Data into Firebase'),
             ),

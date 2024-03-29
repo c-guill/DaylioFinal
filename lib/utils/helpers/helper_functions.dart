@@ -109,4 +109,8 @@ class THelperFunctions {
     }
     return wrappedList;
   }
+
+  static String getMonthYear(DateTime selectedDate) {
+    return DateFormat('MMMM yyyy').format(selectedDate);
+  }
 }

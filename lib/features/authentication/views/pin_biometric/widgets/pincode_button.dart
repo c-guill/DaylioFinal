@@ -34,7 +34,7 @@ class TPinCodeButton extends StatelessWidget {
         style: TextStyle(
           fontSize: TSizes.lg, // Font size
           fontWeight: FontWeight.w600, // Font weight
-          color: darkMode ? TColors.white : TColors.black, // Text color
+          color: darkMode ? TColors.textDarkTheme : TColors.textLightTheme, // Text color
         ),
       ),
     );

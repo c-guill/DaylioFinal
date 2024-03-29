@@ -12,7 +12,7 @@ class TOutlinedButtonTheme {
       elevation: 0,
       foregroundColor: TColors.dark,
       side: const BorderSide(color: TColors.borderPrimary),
-      textStyle: const TextStyle(fontSize: 16, color: TColors.black, fontWeight: FontWeight.w600),
+      textStyle: TextStyle(fontSize: 16, color: TColors.textLightTheme, fontWeight: FontWeight.w600),
       padding: const EdgeInsets.symmetric(vertical: TSizes.buttonHeight, horizontal: 20),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(TSizes.buttonRadius)),
     ),
@@ -23,7 +23,7 @@ class TOutlinedButtonTheme {
     style: OutlinedButton.styleFrom(
       foregroundColor: TColors.light,
       side: const BorderSide(color: TColors.borderPrimary),
-      textStyle: const TextStyle(fontSize: 16, color: TColors.textWhite, fontWeight: FontWeight.w600),
+      textStyle: TextStyle(fontSize: 16, color: TColors.textDarkTheme, fontWeight: FontWeight.w600),
       padding: const EdgeInsets.symmetric(vertical: TSizes.buttonHeight, horizontal: 20),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(TSizes.buttonRadius)),
     ),
