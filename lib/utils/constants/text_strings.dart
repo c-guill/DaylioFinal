@@ -54,6 +54,8 @@ class TTexts {
   static const String usernotfound = "Unknown User";
   static const String wrongpassword = "Wrong password";
   static const String sucessfullogin = "Welcome back";
+  static const String invalidcredential = "Email or password incorrect";
+  static const String emptyinformation = "Please, fill up the forms";
 
 
   // -- Authentication Headings
@@ -80,6 +82,33 @@ class TTexts {
   static const String homeAppbarTitle = "Good day for shopping";
   static const String homeAppbarSubTitle = "Taimoor Sikander";
 
+  // -- Note
+  static const String feeling = "How do you feel now ?";
+  static const String emotions = "Emotions";
+  static const String note = "Quick Note";
+  static const String openNote = "Open full";
+  static const String photo = "Take Photo";
+  static const String gallery = "From Gallery";
+  static const String voice = "Voice Memo";
+  static const String write = "Write a Note";
+  static const String record = "Tap to record";
+  static const String photos = "Photo";
 
+
+  // -- Settings
+  static const String account = "Account";
+  static const String personalDetails = "Personal details";
+  static const String permissions = "Permissions";
+  static const String notifications = "Notifications";
+  static const String locationSettings = "Location settings";
+  static const String security = "Security";
+  static const String faceLock = "Face lock";
+  static const String securityPin = "Security PIN";
+  static const String intruderSelfie = "Intruder selfie";
+  static const String other = "Other";
+  static const String help = "Help";
+  static const String logout = "Logout";
+  static const String editPersonalDetails = "Edit personal details";
+  static const String fullName = "Full name";
 }
 

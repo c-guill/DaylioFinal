@@ -1,8 +1,6 @@
 import 'package:daylio/utils/constants/text_strings.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import '../../../common/widgets/basic_widget/toast.dart';
-
 class FirebaseAuthService {
   FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -13,7 +11,6 @@ class FirebaseAuthService {
     }on FirebaseAuthException {
       rethrow;
     }
-    return null;
   }
 
   Future<User?> signInWithEmailAndPassword(String email, String password) async {
@@ -40,6 +37,10 @@ class FirebaseAuthService {
         return TTexts.usernotfound;
       case 'wrong-password':
         return TTexts.wrongpassword;
+      case 'invalid-credential':
+        return TTexts.invalidcredential;
+      case 'channel-error':
+        return TTexts.emptyinformation;
       default:
         return code;
     }

@@ -1,5 +1,4 @@
 import 'package:daylio/features/diary/views/calendar/calendar.dart';
-import 'package:daylio/features/diary/views/graph/stat.dart';
 import 'package:daylio/features/diary/views/home/home.dart';
 import 'package:daylio/features/diary/views/settings/settings.dart';
 import 'package:daylio/features/diary/views/wallet/wallet.dart';
@@ -56,11 +55,11 @@ class NavigationMenu extends StatelessWidget {
                   label: 'Home',
                   selectedIcon: const Icon(Iconsax.home_2, color: TColors.primary),
                 ),
-                NavigationDestination(
-                  icon: Icon(Iconsax.graph, color: darkMode ? TColors.iconPrimaryDark : TColors.iconPrimaryLight, size: 24),
-                  label: 'Stat',
-                  selectedIcon: const Icon(Iconsax.graph, color: TColors.primary),
-                ),
+                // NavigationDestination(
+                //   icon: Icon(Iconsax.graph, color: darkMode ? TColors.iconPrimaryDark : TColors.iconPrimaryLight, size: 24),
+                //   label: 'Stat',
+                //   selectedIcon: const Icon(Iconsax.graph, color: TColors.primary),
+                // ),
                 NavigationDestination(
                   icon: Icon(Iconsax.calendar_1, color: darkMode ? TColors.iconPrimaryDark : TColors.iconPrimaryLight, size: 24),
                   label: 'Calendar',
@@ -90,8 +89,8 @@ class NavigationController extends GetxController {
   final Rx<int> selectedIndex = 0.obs;
 
   final screens = [
-    HomeScreen(),
-    const StatScreen(),
+    const HomeScreen(),
+    // const StatScreen(),
     const CalendarScreen(),
     WalletScreen(),
     const SettingsScreen(),

@@ -5,7 +5,6 @@ import 'package:daylio/common/widgets/basic_widget/toast.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:firebase_core/firebase_core.dart' as firebase_core;
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../../common/widgets/shared_preferences/manage_data.dart';
@@ -78,7 +77,6 @@ class Storage {
       String UID = await manageData.getUID();
       String date = DateFormat('MMyyyy').format(dateTime);
       QuerySnapshot querySnapshot = await FirebaseFirestore.instance.collection('users/$UID/$date').get();
-
       for (var doc in querySnapshot.docs) {
        notes.add(Note(
           text: doc["text"],

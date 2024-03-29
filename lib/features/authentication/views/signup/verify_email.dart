@@ -11,6 +11,7 @@ import 'package:get/get.dart';
 class VerifyEmailScreen extends StatelessWidget {
   const VerifyEmailScreen({super.key});
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,14 +62,11 @@ class VerifyEmailScreen extends StatelessWidget {
                           ),
                       child: const Text(TTexts.tContinue))),
               const SizedBox(height: TSizes.spaceBtwItems),
-              SizedBox(
-                  width: double.infinity,
-                  child: TextButton(
-                      onPressed: () {}, child: const Text(TTexts.resendEmail))),
             ],
           ),
         ),
       ),
     );
   }
+
 }

@@ -15,7 +15,9 @@ import 'package:get/get.dart';
 import 'package:local_auth/local_auth.dart';
 
 class SecurityPinBiometricScreen extends StatefulWidget {
-  const SecurityPinBiometricScreen({super.key});
+  const SecurityPinBiometricScreen({super.key, required this.setPin});
+
+  final bool setPin;
 
   @override
   State<SecurityPinBiometricScreen> createState() =>
@@ -155,7 +157,11 @@ class _SecurityPinBiometricScreenState extends State<SecurityPinBiometricScreen>
               }
               if (enteredPin.length == 4) {
                 // enteredPin += number.toString();
-                controller.verifyPin(enteredPin);
+                if(widget.setPin){
+                  controller.setPin(enteredPin);
+                }else{
+                  controller.verifyPin(enteredPin);
+                }
               }
             });
           },
@@ -165,24 +171,29 @@ class _SecurityPinBiometricScreenState extends State<SecurityPinBiometricScreen>
 
   // This is the widget for the biometric authentication
   Future<void> _authenticate() async {
-    try {
-      bool authenticated = await auth.authenticate(
-        localizedReason: TTexts.biometricAuthSubTitle,
-        options: const AuthenticationOptions(
-          stickyAuth: true,
-          biometricOnly: true,
-        ),
-      );
-      if (authenticated) {
-        Get.offAll(() => const NavigationMenu(), transition: Transition.rightToLeft);
-      }
-      // print("Authenticated : $authenticated");
-    } on PlatformException catch (e) {
-      // print(e);
-    }
-
-    if (!mounted) {
+    if(widget.setPin){
       return;
+    }else {
+      try {
+        bool authenticated = await auth.authenticate(
+          localizedReason: TTexts.biometricAuthSubTitle,
+          options: const AuthenticationOptions(
+            stickyAuth: true,
+            biometricOnly: true,
+          ),
+        );
+        if (authenticated) {
+          Get.offAll(() => const NavigationMenu(),
+              transition: Transition.rightToLeft);
+        }
+        // print("Authenticated : $authenticated");
+      } on PlatformException catch (e) {
+        // print(e);
+      }
+
+      if (!mounted) {
+        return;
+      }
     }
     // we can call setState here
   }

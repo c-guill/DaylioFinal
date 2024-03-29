@@ -28,8 +28,8 @@ class _TLoginFormState extends State<TLoginForm> {
 
   final FirebaseAuthService _auth = FirebaseAuthService();
   final ManageData manageData = ManageData();
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
 
   @override
@@ -61,9 +61,9 @@ class _TLoginFormState extends State<TLoginForm> {
               controller: _passwordController,
               obscureText: _passwordHidden,
               decoration: InputDecoration(
-                prefixIcon: Icon(Iconsax.password_check),
+                prefixIcon: const Icon(Iconsax.password_check),
                 labelText: TTexts.password,
-                suffixIcon: IconButton(onPressed: _changeVisibilityPassword, icon: _passwordHidden ? Icon(Iconsax.eye) : Icon(Iconsax.eye_slash)),
+                suffixIcon: IconButton(onPressed: _changeVisibilityPassword, icon: _passwordHidden ? const Icon(Iconsax.eye) : const Icon(Iconsax.eye_slash)),
               ),
 
             ),
@@ -88,7 +88,7 @@ class _TLoginFormState extends State<TLoginForm> {
             const SizedBox(height: TSizes.defaultSpace),
 
             // Sign In Button
-            SizedBox(width: double.infinity, child: ElevatedButton(onPressed: _signIn, child: _isSigning ? CircularProgressIndicator(color: Colors.white,) : const Text(TTexts.signIn))),
+            SizedBox(width: double.infinity, child: ElevatedButton(onPressed: _signIn, child: _isSigning ? const CircularProgressIndicator(color: Colors.white,) : const Text(TTexts.signIn))),
             const SizedBox(height: TSizes.spaceBtwItems),
 
             // Create Account Text
@@ -121,10 +121,15 @@ class _TLoginFormState extends State<TLoginForm> {
     try{
       User? user = await _auth.signInWithEmailAndPassword(email, password);
       if(user != null) {
-        Get.to(() => const SecurityPinBiometricScreen(),
-            transition: Transition.downToUp);
-        showToast(message: TTexts.sucessfullogin);
-        manageData.setUID(user);
+        if(user.emailVerified){
+          Get.to(() => const SecurityPinBiometricScreen(setPin: true,),
+              transition: Transition.downToUp);
+          showToast(message: TTexts.sucessfullogin);
+          manageData.setUID(user);
+        }else {
+          showToast(message: "Your email address isn't verified, check your mailbox");
+          await user.sendEmailVerification();
+        }
       }
     } on FirebaseAuthException catch(e){
       showToast(message: _auth.getMessageError(e.code));

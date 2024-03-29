@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 import 'app.dart';
+import 'common/widgets/shared_preferences/manage_data.dart';
 import 'firebase_options.dart';
 
 /// ------ Entry point of Flutter App ------
@@ -11,6 +12,8 @@ Future<void> main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
 
   // Todo: Init Local Storage
+  final ManageData manageData = ManageData();
+
 
   // Todo: Await Native Splash
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
@@ -23,5 +26,8 @@ Future<void> main() async {
 
   // Todo: Initialize Authentication
 
-  runApp(const App());
+  String UID = await manageData.getUID();
+  final themeMode = await manageData.getThemeMode();
+
+  runApp(App(initialThemeMode: themeMode, UID: UID));
 }
