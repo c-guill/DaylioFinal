@@ -20,7 +20,7 @@ class AddNoteScreen extends StatefulWidget {
 }
 
 class _AddNoteScreen extends State<AddNoteScreen>{
-  double heightPhoto = 141;
+  double heightPhoto = 150;
   final Storage storage = Storage();
   bool tap = false;
   List<String> imagePath = [];
@@ -75,7 +75,7 @@ class _AddNoteScreen extends State<AddNoteScreen>{
           children: [
             Text(
                 formattedDate,
-                style: TextStyle(color: TColors.iconPrimaryLight ),
+                style: TextStyle(color: TColors.iconPrimaryLight ,fontWeight: FontWeight.bold, fontSize: 18),
             ),
             //Icon(Icons.edit, color: TColors.iconPrimaryLight ), // Logo crayon
           ],
@@ -225,17 +225,16 @@ class _AddNoteScreen extends State<AddNoteScreen>{
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Expanded(
-              child: FractionallySizedBox(
-              widthFactor: 1,
               child: ContainerCustom(
                 height: heightPhoto,
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                       TTexts.photos, // Texte
                       style: TextStyle(color: TColors.iconPrimaryLight, fontSize: 16),
                     ),
+                    SizedBox(height: 10,),
                     Expanded(  
                       child : Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -244,9 +243,10 @@ class _AddNoteScreen extends State<AddNoteScreen>{
                             onTap: () {
                               // Action lorsque le premier widget est tapé
                             },
-                            child: Container(
-                              height: 45,
-                              width: 141,
+                            child: Expanded( 
+                              child :Container(
+                              height: 40,
+                              width: 120,
                               decoration: BoxDecoration(
                                 color: TColors.softGrey,
                                 borderRadius: BorderRadius.circular(10),
@@ -266,7 +266,7 @@ class _AddNoteScreen extends State<AddNoteScreen>{
                                   ),
                                 ],
                               ),
-                              ),
+                              ),),
                             ),
                           SizedBox(width: 20),
                           GestureDetector(
@@ -291,8 +291,8 @@ class _AddNoteScreen extends State<AddNoteScreen>{
                               storage.uploadFile(path, fileName).then((value) => showToast(message: "The image has been uploaded"));
                           },
                             child: Container(
-                              height: 45,
-                              width: 141,
+                              height: 40,
+                              width: 120,
                               decoration: BoxDecoration(
                                 color: TColors.softGrey,
                                 borderRadius: BorderRadius.circular(10),
@@ -317,7 +317,9 @@ class _AddNoteScreen extends State<AddNoteScreen>{
                         ],
                       ),
                     ),
-                    Row(
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
                       children: [
                         SizedBox(height: 50,),
                         for (var image in imagePath)
@@ -326,13 +328,15 @@ class _AddNoteScreen extends State<AddNoteScreen>{
                               width: 100, 
                               height: 100, 
                               fit: BoxFit.cover, 
-                            )
+                            ),
+                        SizedBox(width: 50,)
                       ],
+                    ),
                     ),
                   ],
                 ),
               ),
-              ),
+              
             ),
             
           ],
