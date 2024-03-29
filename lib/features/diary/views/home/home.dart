@@ -76,82 +76,85 @@ class HomeScreen extends StatelessWidget {
                                     padding: const EdgeInsets.symmetric(vertical: 8.0),
                                     child: Column(
                                       children: notesForTheDay.map((note) {
-                                        return Stack(
-                                          children: [
-                                            Row(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: <Widget>[
-                                                const SizedBox(width: TSizes.xs),
-                                                Column(
-                                                  children: [
-                                                    // CircleAvatar(
-                                                    //   backgroundImage: AssetImage(controller.emotionsImagePaths[note.emotion-1]), // Replace with your emoji asset
-                                                    // ),
-                                                    circleEmotion(
-                                                        'assets/icons/emotions/${controller.emotionsImagePaths[note.emotion - 1]}.png'),
-                                                    const SizedBox(width: 12),
-                                                    Column(
-                                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                                      children: [
-                                                        Text(
-                                                          controller.emotionsImagePaths[note.emotion - 1],
-                                                          style: TextStyle(
-                                                            color: controller.chartBarColor[note.emotion - 1],
-                                                            fontWeight: FontWeight.bold,
-                                                            fontSize: TSizes.fontSizeLg,
+                                        return Padding(
+                                          padding: const EdgeInsets.symmetric(vertical: TSizes.lg),
+                                          child: Stack(
+                                            children: [
+                                              Row(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: <Widget>[
+                                                  const SizedBox(width: TSizes.xs),
+                                                  Column(
+                                                    children: [
+                                                      // CircleAvatar(
+                                                      //   backgroundImage: AssetImage(controller.emotionsImagePaths[note.emotion-1]), // Replace with your emoji asset
+                                                      // ),
+                                                      circleEmotion(
+                                                          'assets/icons/emotions/${controller.emotionsImagePaths[note.emotion - 1]}.png'),
+                                                      const SizedBox(width: 12),
+                                                      Column(
+                                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                                        children: [
+                                                          Text(
+                                                            controller.emotionsImagePaths[note.emotion - 1],
+                                                            style: TextStyle(
+                                                              color: controller.chartBarColor[note.emotion - 1],
+                                                              fontWeight: FontWeight.bold,
+                                                              fontSize: TSizes.fontSizeLg,
+                                                            ),
                                                           ),
-                                                        ),
-                                                        Text(
-                                                          getRandomTime(), // Assuming this is the time
-                                                          style:
-                                                              const TextStyle(color: TColors.grey, fontSize: TSizes.fontSizeMd),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ],
-                                                ),
-                                                const SizedBox(width: 27),
-                                                Column(
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                  children: [
-                                                    const Row(
-                                                      mainAxisSize: MainAxisSize.min,
-                                                      mainAxisAlignment: MainAxisAlignment.start,
-                                                      children: [
-                                                        Icon(Icons.cloud, color: Colors.blue),
-                                                        SizedBox(width: 8),
-                                                        Icon(Icons.star, color: Colors.yellow),
-                                                        SizedBox(width: 8),
-                                                        Icon(Icons.run_circle, color: Colors.red),
-                                                        SizedBox(width: 8),
-                                                        Icon(Icons.directions_walk, color: Colors.green),
-                                                      ],
-                                                    ),
-                                                    const SizedBox(height: 18),
-                                                    SizedBox(
-                                                      width: THelperFunctions.screenWidth() - 2 * TSizes.defaultSpace - 120,
-                                                      child: Text(
-                                                        note.text,
-                                                        style: Theme.of(context).textTheme.bodyMedium,
+                                                          Text(
+                                                            getRandomTime(), // Assuming this is the time
+                                                            style:
+                                                                const TextStyle(color: TColors.grey, fontSize: TSizes.fontSizeMd),
+                                                          ),
+                                                        ],
                                                       ),
-                                                    ),
-                                                    const SizedBox(height: 16),
-                                                    Row(
-                                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                      children: note.image.map((image) {
-                                                        return imageOfNotes(image);
-                                                      }).toList(),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                            Positioned(
-                                              right: -10,
-                                              top: -10,
-                                              child: buildPopupMenuButton(context),
-                                            ),
-                                          ],
+                                                    ],
+                                                  ),
+                                                  const SizedBox(width: 27),
+                                                  Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                    children: [
+                                                      const Row(
+                                                        mainAxisSize: MainAxisSize.min,
+                                                        mainAxisAlignment: MainAxisAlignment.start,
+                                                        children: [
+                                                          Icon(Icons.cloud, color: Colors.blue),
+                                                          SizedBox(width: 8),
+                                                          Icon(Icons.star, color: Colors.yellow),
+                                                          SizedBox(width: 8),
+                                                          Icon(Icons.run_circle, color: Colors.red),
+                                                          SizedBox(width: 8),
+                                                          Icon(Icons.directions_walk, color: Colors.green),
+                                                        ],
+                                                      ),
+                                                      const SizedBox(height: 18),
+                                                      SizedBox(
+                                                        width: THelperFunctions.screenWidth() - 2 * TSizes.defaultSpace - 120,
+                                                        child: Text(
+                                                          note.text,
+                                                          style: Theme.of(context).textTheme.bodyMedium,
+                                                        ),
+                                                      ),
+                                                      const SizedBox(height: 16),
+                                                      Row(
+                                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                        children: note.image.map((image) {
+                                                          return imageOfNotes(image);
+                                                        }).toList(),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                              Positioned(
+                                                right: -10,
+                                                top: -10,
+                                                child: buildPopupMenuButton(context),
+                                              ),
+                                            ],
+                                          ),
                                         );
                                       }).toList(),
                                     ),

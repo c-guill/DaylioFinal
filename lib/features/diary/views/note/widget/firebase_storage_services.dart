@@ -39,7 +39,9 @@ class Storage {
   }
 
   Future<String> downloadURL(String imageName) async {
-    String downloadURL = await storage.ref('test/$imageName').getDownloadURL();
+    String UID = await manageData.getUID();
+    String date = DateFormat('ddMMyyyy').format(DateTime.now());
+    String downloadURL = await storage.ref('$UID/$date/$imageName').getDownloadURL();
     return downloadURL;
   }
 

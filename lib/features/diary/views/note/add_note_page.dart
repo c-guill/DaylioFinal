@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:daylio/common/styles/spacing_styles.dart';
 import 'package:daylio/common/widgets/basic_widget/container.dart';
 import 'package:daylio/common/widgets/basic_widget/toast.dart';
+import 'package:daylio/features/diary/controllers/calendar/calendar_controller.dart';
+import 'package:daylio/features/diary/controllers/home/home_controller.dart';
 import 'package:daylio/features/diary/views/note/widget/note.dart';
 import 'package:daylio/features/diary/views/note/widget/firebase_storage_services.dart';
 import 'package:daylio/utils/constants/colors.dart';
@@ -398,7 +400,8 @@ class _AddNoteScreen extends State<AddNoteScreen>{
                   j+=1;
                 }
                 print(myData.image);
-                storage.addNote(myData); 
+                storage.addNote(myData);
+                final controller = Get.put(HomeController()).updateSelectedMonthPage(DateTime.now());
                 Get.back();
               ; 
               },
