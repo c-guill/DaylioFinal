@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:daylio/common/widgets/appbar/appbar.dart';
 import 'package:daylio/common/widgets/basic_widget/container.dart';
 import 'package:daylio/features/diary/controllers/calendar/calendar_controller.dart';
+import 'package:daylio/features/diary/views/note/add_note_page.dart';
 import 'package:daylio/features/diary/views/note/widget/note.dart';
 import 'package:daylio/utils/constants/colors.dart';
 import 'package:daylio/utils/constants/sizes.dart';
@@ -165,7 +166,7 @@ class NotesScreen extends StatelessWidget {
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {
-                        // Action for creating a new note
+                        Get.to(const AddNoteScreen());
                       },
                       child: const Text('Create a new note!'),
                     ),

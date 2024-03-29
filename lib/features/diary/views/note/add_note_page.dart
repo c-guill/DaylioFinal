@@ -108,11 +108,11 @@ class _AddNoteScreen extends State<AddNoteScreen>{
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                          buildEmojiImage('very_sad_b.png',context),
-                          buildEmojiImage('sad_b.png',context),
-                          buildEmojiImage('meh_b.png',context),
-                          buildEmojiImage('happy_b.png',context),
-                          buildEmojiImage('very_happy_b.png',context),
+                            buildEmojiImage('very_happy_b.png',context),
+                            buildEmojiImage('happy_b.png',context),
+                            buildEmojiImage('meh_b.png',context),
+                            buildEmojiImage('sad_b.png',context),
+                            buildEmojiImage('very_sad_b.png',context),
                         ]
                       )
                     ),
