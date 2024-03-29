@@ -7,7 +7,6 @@ import 'package:daylio/utils/constants/text_strings.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../../../../common/widgets/shared_preferences/manage_data.dart';
@@ -29,8 +28,8 @@ class _TLoginFormState extends State<TLoginForm> {
 
   final FirebaseAuthService _auth = FirebaseAuthService();
   final ManageData manageData = ManageData();
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
 
   @override
@@ -62,9 +61,9 @@ class _TLoginFormState extends State<TLoginForm> {
               controller: _passwordController,
               obscureText: _passwordHidden,
               decoration: InputDecoration(
-                prefixIcon: Icon(Iconsax.password_check),
+                prefixIcon: const Icon(Iconsax.password_check),
                 labelText: TTexts.password,
-                suffixIcon: IconButton(onPressed: _changeVisibilityPassword, icon: _passwordHidden ? Icon(Iconsax.eye) : Icon(Iconsax.eye_slash)),
+                suffixIcon: IconButton(onPressed: _changeVisibilityPassword, icon: _passwordHidden ? const Icon(Iconsax.eye) : const Icon(Iconsax.eye_slash)),
               ),
 
             ),
@@ -89,7 +88,7 @@ class _TLoginFormState extends State<TLoginForm> {
             const SizedBox(height: TSizes.defaultSpace),
 
             // Sign In Button
-            SizedBox(width: double.infinity, child: ElevatedButton(onPressed: _signIn, child: _isSigning ? CircularProgressIndicator(color: Colors.white,) : const Text(TTexts.signIn))),
+            SizedBox(width: double.infinity, child: ElevatedButton(onPressed: _signIn, child: _isSigning ? const CircularProgressIndicator(color: Colors.white,) : const Text(TTexts.signIn))),
             const SizedBox(height: TSizes.spaceBtwItems),
 
             // Create Account Text

@@ -15,7 +15,7 @@ class WriteNoteScreen extends StatelessWidget {
       appBar: AppBar(
         actions: [
           IconButton(
-            icon: Icon(Icons.done),
+            icon: const Icon(Icons.done),
             onPressed: () {
               Navigator.pop(context, noteText ?? ""); 
             },
@@ -32,7 +32,7 @@ class WriteNoteScreen extends StatelessWidget {
                 textAlignVertical: TextAlignVertical.top,
                 maxLines: null,
                 expands: true,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   hintText: 'Write your note here...',
                   border: InputBorder.none,
                 ),

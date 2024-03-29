@@ -4,7 +4,6 @@ import 'package:daylio/utils/constants/image_strings.dart';
 import 'package:daylio/utils/constants/sizes.dart';
 import 'package:daylio/utils/constants/text_strings.dart';
 import 'package:daylio/utils/helpers/helper_functions.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

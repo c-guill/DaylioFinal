@@ -4,7 +4,6 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 import 'app.dart';
 import 'common/widgets/shared_preferences/manage_data.dart';
-import 'app.dart';
 import 'firebase_options.dart';
 
 /// ------ Entry point of Flutter App ------
@@ -26,6 +25,9 @@ Future<void> main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   // Todo: Initialize Authentication
+
   String UID = await manageData.getUID();
-  runApp(App(UID: UID,));
+  final themeMode = await manageData.getThemeMode();
+
+  runApp(App(initialThemeMode: themeMode, UID: UID));
 }

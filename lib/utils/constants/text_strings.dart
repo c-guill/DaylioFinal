@@ -87,7 +87,7 @@ class TTexts {
   static const String emotions = "Emotions";
   static const String note = "Quick Note";
   static const String openNote = "Open full";
-  static const String photo = "Take Photo"; 
+  static const String photo = "Take Photo";
   static const String gallery = "From Gallery";
   static const String voice = "Voice Memo";
   static const String write = "Write a Note";
@@ -95,5 +95,20 @@ class TTexts {
   static const String photos = "Photo";
 
 
+  // -- Settings
+  static const String account = "Account";
+  static const String personalDetails = "Personal details";
+  static const String permissions = "Permissions";
+  static const String notifications = "Notifications";
+  static const String locationSettings = "Location settings";
+  static const String security = "Security";
+  static const String faceLock = "Face lock";
+  static const String securityPin = "Security PIN";
+  static const String intruderSelfie = "Intruder selfie";
+  static const String other = "Other";
+  static const String help = "Help";
+  static const String logout = "Logout";
+  static const String editPersonalDetails = "Edit personal details";
+  static const String fullName = "Full name";
 }
 

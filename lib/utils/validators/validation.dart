@@ -1,4 +1,3 @@
-
 class TValidator {
   static String? validateEmail(String? value) {
     if (value == null || value.isEmpty) {
@@ -53,6 +52,20 @@ class TValidator {
 
     if (!phoneRegExp.hasMatch(value)) {
       return 'Invalid phone number format (10 digits required).';
+    }
+
+    return null;
+  }
+
+  static String? validateName(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Full name is required.';
+    }
+
+    final nameRegExp = RegExp(r"^[a-zA-Z]+(?:[ -'][a-zA-Z]+)*$");
+
+    if (!nameRegExp.hasMatch(value)) {
+      return 'Invalid full name format.';
     }
 
     return null;
