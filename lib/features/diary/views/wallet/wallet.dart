@@ -21,9 +21,21 @@ class WalletScreen extends StatelessWidget {
             Center(child: Text('Wallet Screen')),
             ElevatedButton(
               onPressed: () {
-                 // storage.addNote(Note(text: "victor hugo page 142", emotion: 2, feeling: [2,4,5], image: ["image1","image2"], date: DateTime.now()));
+                  // storage.addNote(Note(text: "victor hugo page 142", emotion: 2, feeling: [2,4,5], image: ["image1","image2"], date: DateTime.now()));
                  //storage.getNotes(DateTime.fromMillisecondsSinceEpoch(1711620000));
-                 storage.getNotes(DateTime.now());
+                storage.getNotes(DateTime.utc(2024, 02, 01)).then((notes) {
+                  if (notes != null) {
+                    for (var note in notes) {
+                      print(note.text);
+                    }
+                  } else {
+                    print('No notes available.');
+                  }
+                }).catchError((e) {
+                  print('Error fetching notes: $e');
+                });
+
+
               },
               child: Text('Insert Data into Firebase'),
             ),

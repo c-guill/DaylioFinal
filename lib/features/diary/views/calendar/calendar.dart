@@ -20,8 +20,6 @@ class CalendarScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final darkMode = THelperFunctions.isDarkMode(context);
     final CalendarController controller = Get.put(CalendarController());
-    double chartValue = .0;
-
 
     return Scaffold(
       body: SingleChildScrollView(

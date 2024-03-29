@@ -99,7 +99,7 @@ class TSizes {
   static const double moodCalendarHeight = 330.0;
 
   // Mood chart size
-  static const double moodChartHeight = 286.0;
+  static const double moodChartHeight = 270.0;
   static const double moodChartWidth = 16.0;
   static const double moodChartRadius = 10.0;
   static const double moodChartElevation = 8.0;

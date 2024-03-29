@@ -4,10 +4,10 @@ import 'package:daylio/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 
 class ContainerCustom extends StatefulWidget {
-  final double height;
+  final double? height;
   final Widget? child;
 
-  const ContainerCustom({super.key, required this.height, this.child});
+  const ContainerCustom({super.key, this.height, this.child});
 
   @override
   State<ContainerCustom> createState() => _ContainerCustomState();

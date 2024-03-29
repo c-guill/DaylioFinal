@@ -22,10 +22,13 @@ class Storage {
     String filePath,
     String fileName,
       ) async {
+      String UID = await manageData.getUID();
       File file = File(filePath);
+      String date = DateFormat('ddMMyyyy').format(DateTime.now());
+
 
       try {
-        await storage.ref('test/$fileName').putFile(file);
+        await storage.ref('$UID/$date/$fileName').putFile(file);
       } on firebase_core.FirebaseException catch(e){
         showToast(message: "A problem occured, please try again");
       }
@@ -51,7 +54,7 @@ class Storage {
   Future<void> addNote(Note note)async {
     try {
       Future<String> UID = manageData.getUID();
-      String date = DateFormat('ddMMyyyy').format(note.date);
+      String date = DateFormat('MMyyyy').format(note.date);
       UID.then((value) => {
       FirebaseFirestore.instance.collection(
       'users/$value/$date').add({
@@ -69,11 +72,11 @@ class Storage {
     }
   }
 
-  Future<Note?> getNotes(DateTime dateTime) async {
+  Future<List<Note>?> getNotes(DateTime dateTime) async {
     try {
       List<Note> notes = [];
       String UID = await manageData.getUID();
-      String date = DateFormat('ddMMyyyy').format(dateTime);
+      String date = DateFormat('MMyyyy').format(dateTime);
       QuerySnapshot querySnapshot = await FirebaseFirestore.instance.collection('users/$UID/$date').get();
 
       for (var doc in querySnapshot.docs) {
@@ -85,14 +88,11 @@ class Storage {
           feeling: doc["feeling"]
         ));
       }
+      return notes;
 
     }catch (e){
       print("An error occured, please try again $e");
     }
     return null;
   }
-
-
-
-
 }
