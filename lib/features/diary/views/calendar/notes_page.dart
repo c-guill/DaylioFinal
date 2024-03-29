@@ -22,6 +22,43 @@ class NotesScreen extends StatelessWidget {
     final controller = Get.put(CalendarController());
     List<Note> notesForTheDay = controller.getNotesForDay(date);
 
+    if (notesForTheDay.isEmpty) {
+      return Scaffold(
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              // Header
+              const TAppBar(showBackArrow: true),
+
+              Text(THelperFunctions.getFormattedDate(date), style: Theme.of(context).textTheme.headlineMedium),
+
+              // Body
+              Padding(
+                padding: const EdgeInsets.all(TSizes.defaultSpace),
+                child: Column(
+                  children: [
+                    ContainerCustom(
+                      child: Text('No notes for this day...', style: Theme.of(context).textTheme.bodyLarge),
+                    ),
+                    const SizedBox(height: TSizes.spaceBtwSections),
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          // Action for creating a new note
+                        },
+                        child: const Text('Create a new note!'),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
