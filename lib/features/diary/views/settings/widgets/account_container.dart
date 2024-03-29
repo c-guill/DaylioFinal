@@ -13,7 +13,7 @@ import 'package:iconsax/iconsax.dart';
 import '../account/personal_details.dart';
 
 class AccountContainer extends StatefulWidget {
-  const AccountContainer({super.key});
+  const AccountContainer({Key? key});
 
   @override
   State<AccountContainer> createState() => _AccountContainerState();
@@ -38,12 +38,7 @@ class _AccountContainerState extends State<AccountContainer> {
           const SizedBox(height: TSizes.spaceBtwSections),
           GestureDetector(
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const PersonalDataPage(),
-                ),
-              );
+              Get.to(const PersonalDataPage(), transition: Transition.rightToLeft);
             },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

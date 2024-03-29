@@ -1,9 +1,11 @@
 import 'package:daylio/common/widgets/basic_widget/container.dart';
+import 'package:daylio/features/authentication/views/pin_biometric/security_pin_biometric.dart';
 import 'package:daylio/utils/constants/colors.dart';
 import 'package:daylio/utils/constants/sizes.dart';
 import 'package:daylio/utils/constants/text_strings.dart';
 import 'package:daylio/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 class SecurityContainer extends StatelessWidget {
@@ -44,23 +46,37 @@ class SecurityContainer extends StatelessWidget {
             ],
           ),
           const SizedBox(height: TSizes.spaceBtwSections),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text(
-                TTexts.securityPin,
-                style: TextStyle(
-                  fontSize: TSizes.fontSizeMd,
+          GestureDetector(
+            onTap: () {
+              Get.to(() => const SecurityPinBiometricScreen(setPin: true,),
+                  transition: Transition.downToUp);
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () {
+                      Get.to(() => const SecurityPinBiometricScreen(setPin: true,),
+                          transition: Transition.downToUp);
+                    },
+                    child: const Text(
+                      TTexts.securityPin,
+                      style: TextStyle(
+                        fontSize: TSizes.fontSizeMd,
+                      ),
+                    ),
+                  ),
                 ),
-              ),
-              Icon(
-                Iconsax.lock_circle,
-                size: TSizes.iconMd,
-                color: darkMode
-                    ? TColors.iconPrimaryDark
-                    : TColors.iconPrimaryLight,
-              ),
-            ],
+                Icon(
+                  Iconsax.lock_circle,
+                  size: TSizes.iconMd,
+                  color: darkMode
+                      ? TColors.iconPrimaryDark
+                      : TColors.iconPrimaryLight,
+                ),
+              ],
+            ),
           ),
           const SizedBox(height: TSizes.spaceBtwSections),
           Row(
