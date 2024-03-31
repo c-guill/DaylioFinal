@@ -46,7 +46,7 @@ class NotesScreen extends StatelessWidget {
                       width: double.infinity,
                       child: ElevatedButton(
                         onPressed: () {
-                          // Action for creating a new note
+                          Get.to(const AddNoteScreen());
                         },
                         child: const Text('Create a new note!'),
                       ),
@@ -79,7 +79,8 @@ class NotesScreen extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
                       child: Column(
                         children: notesForTheDay.map((note) {
-                          return Container(
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(vertical: TSizes.lg),
                             child: Stack(
                               children: [
                                 Row(
