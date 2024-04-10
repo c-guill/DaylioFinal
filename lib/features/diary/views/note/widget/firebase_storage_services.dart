@@ -38,15 +38,17 @@ class Storage {
     return results;
   }
 
-  Future<String> downloadURL(String imageName) async {
+  Future<String> downloadURL(String imageName, DateTime dateTime) async {
     String UID = await manageData.getUID();
-    String date = DateFormat('ddMMyyyy').format(DateTime.now());
+    String date = DateFormat('ddMMyyyy').format(dateTime);
+    print(imageName +" - "+date);
     String downloadURL = await storage.ref('$UID/$date/$imageName').getDownloadURL();
     return downloadURL;
   }
 
   Future<void> insertData() async {
-      CollectionReference collRef = FirebaseFirestore.instance.collection('client');
+    String UID = await manageData.getUID();
+      CollectionReference collRef = FirebaseFirestore.instance.collection('users/$UID');
       collRef.add({
         'name': 'test',
       });
@@ -64,7 +66,7 @@ class Storage {
           'feeling': note.feeling,
           'image': note.image,
           'date': note.date.millisecondsSinceEpoch,
-          })
+          }).then((value) => {note.id = value as String})
       });
 
       print("The note has been added");
@@ -72,6 +74,54 @@ class Storage {
       print("An error occured, please try again $e");
     }
   }
+
+  Future<void> deleteNote(Note note) async {
+    try {
+      Future<String> UID = manageData.getUID();
+      String date = DateFormat('MMyyyy').format(note.date);
+      UID.then((value) => {
+        FirebaseFirestore.instance
+            .collection('users/$value/$date')
+            .doc(note.id)
+            .delete()
+            .then((value) {
+          print("Note deleted successfully");
+        }).catchError((error) {
+          print("Failed to delete note: $error");
+        })
+      });
+    }catch (e){
+      print("An error occured, please try again $e");
+    }
+  }
+
+  Future<void> updateNote(Note note) async {
+    try {
+      Future<String> UID = manageData.getUID();
+      String date = DateFormat('MMyyyy').format(note.date);
+      UID.then((value) {
+        FirebaseFirestore.instance
+            .collection('users/$value/$date')
+            .doc(note.id)
+            .update({
+          'text': note.text,
+          'emotion': note.emotion,
+          'feeling': note.feeling,
+          'image': note.image,
+          'date': note.date.millisecondsSinceEpoch,
+        })
+            .then((value) {
+          print("Note updated successfully");
+        })
+            .catchError((error) {
+          print("Failed to update note: $error");
+        });
+      });
+    } catch (e) {
+      print("An error occurred, please try again $e");
+    }
+  }
+
 
   Future<List<Note>?> getNotes(DateTime dateTime) async {
     try {
@@ -85,7 +135,8 @@ class Storage {
           image: doc["image"],
           date: DateTime.fromMillisecondsSinceEpoch(doc["date"]),
           emotion: doc["emotion"],
-          feeling: doc["feeling"]
+          feeling: doc["feeling"],
+          id: doc.id
         ));
       }
       return notes;

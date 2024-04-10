@@ -148,7 +148,7 @@ class CalendarController extends GetxController {
   }
 
   // Get image byte name
-  Future<String> getNoteImages(String name) {
-    return storage.downloadURL(name);
+  Future<String> getNoteImages(String name, DateTime dateTime) {
+    return storage.downloadURL(name, dateTime);
   }
 }

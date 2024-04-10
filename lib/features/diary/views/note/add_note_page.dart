@@ -53,6 +53,7 @@ class _AddNoteScreen extends State<AddNoteScreen>{
     'anxious_b.png': false,
   };
   Note myData = Note(
+    id: "",
     text: "",
     emotion: 0,
     feeling: [],

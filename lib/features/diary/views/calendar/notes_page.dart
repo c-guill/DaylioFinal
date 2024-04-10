@@ -143,7 +143,7 @@ class NotesScreen extends StatelessWidget {
                                         Row(
                                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children: note.image.map((image) {
-                                            return imageOfNotes(image);
+                                            return imageOfNotes(image, note.date);
                                           }).toList(),
                                         ),
                                       ],
@@ -218,9 +218,9 @@ class NotesScreen extends StatelessWidget {
     );
   }
 
-  Widget imageOfNotes(String image) {
+  Widget imageOfNotes(String image, DateTime dateTime) {
     return FutureBuilder(
-        future: Get.put(CalendarController()).storage.downloadURL(image),
+        future: Get.put(CalendarController()).storage.downloadURL(image, dateTime),
         builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
           if (snapshot.connectionState == ConnectionState.done && snapshot.hasData) {
             return Padding(

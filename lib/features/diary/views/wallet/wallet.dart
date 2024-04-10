@@ -63,7 +63,7 @@ class WalletScreen extends StatelessWidget {
               child: Text("Upload file"),
             ),
             FutureBuilder(
-                future: storage.downloadURL('picsou2.jpg'),
+                future: storage.downloadURL('picsou2.jpg', DateTime.now()),
                 builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
                   if(snapshot.connectionState == ConnectionState.done && snapshot.hasData) {
                     return Container(width: 300, height: 250, child: Image.network(snapshot.data!, fit: BoxFit.cover));

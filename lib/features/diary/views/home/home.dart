@@ -12,8 +12,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
+import '../note/widget/firebase_storage_services.dart';
+
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  HomeScreen({super.key});
+
+  final Storage storage = Storage();
+
 
   @override
   Widget build(BuildContext context) {
@@ -141,7 +146,7 @@ class HomeScreen extends StatelessWidget {
                                                       Row(
                                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                         children: note.image.map((image) {
-                                                          return imageOfNotes(image);
+                                                          return imageOfNotes(image, note.date);
                                                         }).toList(),
                                                       ),
                                                     ],
@@ -151,7 +156,7 @@ class HomeScreen extends StatelessWidget {
                                               Positioned(
                                                 right: -10,
                                                 top: -10,
-                                                child: buildPopupMenuButton(context),
+                                                child: buildPopupMenuButton(context, note),
                                               ),
                                             ],
                                           ),
@@ -197,21 +202,25 @@ class HomeScreen extends StatelessWidget {
     return days;
   }
 
-  PopupMenuButton<String> buildPopupMenuButton(context) {
+  PopupMenuButton<String> buildPopupMenuButton(context, Note note) {
     return PopupMenuButton<String>(
       onSelected: (String value) {
         // Handle the action based on the selected value
-        print('Selected: $value');
+        print('Selected: $value ${note.id}');
         switch (value) {
           case 'Edit':
             // Handle edit action
             // Get.to(() => EditNoteScreen());
+            note.text = "hihi";
+            storage.updateNote(note);
+            Get.put(HomeController()).updateSelectedMonthPage(note.date);
             break;
           case 'Share':
             // Handle share action
             break;
           case 'Delete':
-            // Handle delete action
+            storage.deleteNote(note);
+            Get.put(HomeController()).updateSelectedMonthPage(note.date);
             break;
         }
       },
@@ -234,9 +243,9 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget imageOfNotes(String image) {
+  Widget imageOfNotes(String image, DateTime dateTime) {
     return FutureBuilder(
-        future: Get.put(HomeController()).storage.downloadURL(image),
+        future: Get.put(HomeController()).storage.downloadURL(image, dateTime),
         builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
           if (snapshot.connectionState == ConnectionState.done && snapshot.hasData) {
             return Padding(

@@ -13,7 +13,6 @@ class _PersonalDataFormState extends State<PersonalDataForm> {
   final _formKey = GlobalKey<FormState>();
   TextEditingController firstNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -49,22 +48,11 @@ class _PersonalDataFormState extends State<PersonalDataForm> {
               validator: TValidator.validateName,
             ),
             const SizedBox(height: TSizes.spaceBtwSections),
-            TextFormField(
-              controller: passwordController,
-              decoration: const InputDecoration(
-                labelText: 'Password',
-                border: OutlineInputBorder(),
-              ),
-              validator: TValidator.validatePassword,
-              obscureText: true,
-            ),
-            const SizedBox(height: TSizes.spaceBtwSections),
             ElevatedButton(
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
                   print('First Name: ${firstNameController.text}');
                   print('Last Name: ${lastNameController.text}');
-                  print('Password: ${passwordController.text}');
                 }
               },
               child: const Text(TTexts.save),

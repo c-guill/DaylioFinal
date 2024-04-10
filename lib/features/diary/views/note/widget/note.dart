@@ -4,8 +4,10 @@ class Note {
   List<dynamic> feeling;
   List<dynamic> image;
   DateTime date;
+  String id;
 
   Note({
+    required this.id,
     required this.text,
     required this.emotion,
     required this.feeling,
