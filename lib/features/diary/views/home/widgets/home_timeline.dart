@@ -66,9 +66,6 @@ class THomeTimeline extends StatelessWidget {
                                 const SizedBox(width: TSizes.xs),
                                 Column(
                                   children: [
-                                    // CircleAvatar(
-                                    //   backgroundImage: AssetImage(controller.emotionsImagePaths[note.emotion-1]), // Replace with your emoji asset
-                                    // ),
                                     circleEmotion(
                                         'assets/icons/emotions/${controller.emotionsImagePaths[note.emotion - 1]}.png'),
                                     const SizedBox(width: 12),
