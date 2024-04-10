@@ -4,6 +4,7 @@ import 'package:daylio/common/widgets/basic_widget/container.dart';
 import 'package:daylio/common/widgets/calendar/calendar_dropdown.dart';
 import 'package:daylio/features/diary/controllers/home/home_controller.dart';
 import 'package:daylio/features/diary/views/home/widgets/home_appbar.dart';
+import 'package:daylio/features/diary/views/note/add_note_page.dart';
 import 'package:daylio/features/diary/views/note/widget/note.dart';
 import 'package:daylio/utils/constants/colors.dart';
 import 'package:daylio/utils/constants/sizes.dart';
@@ -209,11 +210,10 @@ class HomeScreen extends StatelessWidget {
         print('Selected: $value ${note.id}');
         switch (value) {
           case 'Edit':
-            // Handle edit action
-            // Get.to(() => EditNoteScreen());
-            note.text = "hihi";
-            storage.updateNote(note);
-            Get.put(HomeController()).updateSelectedMonthPage(note.date);
+            Get.to(const AddNoteScreen(), arguments: note);
+            //note.text = "hiha";
+            //storage.updateNote(note);
+            //Get.put(HomeController()).updateSelectedMonthPage(note.date);
             break;
           case 'Share':
             // Handle share action

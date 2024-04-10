@@ -2,7 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 
-import 'app.dart';
+import 'app.dart'; 
 import 'common/widgets/shared_preferences/manage_data.dart';
 import 'firebase_options.dart';
 
@@ -12,7 +12,7 @@ Future<void> main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
 
   // Todo: Init Local Storage
-  final ManageData manageData = ManageData();
+final ManageData manageData = ManageData();
 
 
   // Todo: Await Native Splash
@@ -22,7 +22,7 @@ Future<void> main() async {
   // await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform).then(
   //     (FirebaseApp value) => Get.put(AuthenticationRepository()),
   // );
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   // Todo: Initialize Authentication
 

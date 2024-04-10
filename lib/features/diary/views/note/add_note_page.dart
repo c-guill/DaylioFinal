@@ -29,6 +29,7 @@ class _AddNoteScreen extends State<AddNoteScreen>{
   double heightPhoto = 150;
   final Storage storage = Storage();
   bool tap = false;
+  bool check_edit = false;
   List<String> imagePath = [];
   final ImagePicker _picker = ImagePicker();
   Map<String, bool> tapStates = {
@@ -64,6 +65,13 @@ class _AddNoteScreen extends State<AddNoteScreen>{
 
   @override
   Widget build(BuildContext context) {
+    final Note edit = Get.arguments;
+    if (edit == null || edit.toString().isEmpty) {
+      check_edit = false ;
+    }else{
+      check_edit = true;
+      
+    }
     DateTime now = DateTime.now();
   String formattedDate = '${now.year}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}';
 
@@ -401,7 +409,16 @@ class _AddNoteScreen extends State<AddNoteScreen>{
                   j+=1;
                 }
                 print(myData.image);
-                storage.addNote(myData);
+                if (check_edit==false){
+                  storage.addNote(myData);
+                }else{
+                  edit.text = myData.text;
+                  edit.emotion = myData.emotion;
+                  edit.feeling = myData.feeling;
+                  edit.image = myData.image;
+                  storage.updateNote(edit);
+                }
+                
                 final controller = Get.put(HomeController()).updateSelectedMonthPage(DateTime.now());
                 Get.back();
               ; 

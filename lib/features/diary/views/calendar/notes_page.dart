@@ -188,8 +188,6 @@ class NotesScreen extends StatelessWidget {
         print('Selected: $value');
         switch (value) {
           case 'Edit':
-            // Handle edit action
-            // Get.to(() => EditNoteScreen());
             break;
           case 'Share':
             // Handle share action
