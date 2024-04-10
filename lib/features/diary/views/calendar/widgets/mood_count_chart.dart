@@ -1,5 +1,4 @@
-
-//import 'package:d_chart/bar_custom/view.dart';
+import 'package:d_chart/bar_custom/view.dart';
 import 'package:daylio/common/widgets/basic_widget/container.dart';
 import 'package:daylio/features/diary/controllers/calendar/calendar_controller.dart';
 import 'package:daylio/utils/constants/colors.dart';
@@ -36,7 +35,7 @@ class TMoodChartCount extends StatelessWidget {
                         .copyWith(color: darkMode ? TColors.textDarkTheme : TColors.textLightTheme),
                   ),
                 ],
-              ),/*
+              ),
               AspectRatio(
                 aspectRatio: 16 / 9,
                 child: DChartBarCustom(
@@ -98,7 +97,7 @@ class TMoodChartCount extends StatelessWidget {
                     );
                   }),
                 ),
-              ),*/
+              ),
             ],
           ),
         ));

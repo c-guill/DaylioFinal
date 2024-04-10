@@ -33,11 +33,11 @@ class _AddNoteScreen extends State<AddNoteScreen>{
   List<String> imagePath = [];
   final ImagePicker _picker = ImagePicker();
   Map<String, bool> tapStates = {
-    'very_sad_b.png': false,
-    'sad_b.png': false,
-    'meh_b.png': false,
-    'happy_b.png': false,
     'very_happy_b.png': false,
+    'happy_b.png': false,
+    'meh_b.png': false,
+    'sad_b.png': false,
+    'very_sad_b.png': false,
   };
   Map<String, bool> tapStates2 = {
     'excited_b.png': false,
@@ -65,7 +65,7 @@ class _AddNoteScreen extends State<AddNoteScreen>{
 
   @override
   Widget build(BuildContext context) {
-    final Note edit = Get.arguments;
+    final edit = Get.arguments;
     if (edit == null || edit.toString().isEmpty) {
       check_edit = false ;
     }else{
@@ -394,8 +394,8 @@ class _AddNoteScreen extends State<AddNoteScreen>{
                 if (myData.text.isEmpty){
                   myData.text = _textFieldController.text;
                 }
-                int i = 0;
-                int j = 0;
+                int i = 1;
+                int j = 1;
                 for (var key in tapStates.keys) {
                   if (tapStates[key] != false){
                     myData.emotion = i;

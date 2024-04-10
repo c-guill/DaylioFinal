@@ -30,7 +30,7 @@ class THomeAppBar extends StatelessWidget {
           icon: Icon(Icons.share_outlined, color: darkMode ? TColors.iconPrimaryDark : TColors.iconPrimaryLight, size: 24),
         ),
         IconButton(
-          onPressed: () => Get.to(const AddNoteScreen()),
+          onPressed: () => Get.to(const AddNoteScreen(), arguments: null),
           icon: Icon(Icons.add_circle_outline, color: darkMode ? TColors.iconPrimaryDark : TColors.iconPrimaryLight, size: 24),
         ),
         IconButton(

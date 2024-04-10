@@ -4,6 +4,7 @@ import 'package:daylio/common/widgets/appbar/appbar.dart';
 import 'package:daylio/common/widgets/basic_widget/container.dart';
 import 'package:daylio/features/diary/controllers/calendar/calendar_controller.dart';
 import 'package:daylio/features/diary/views/note/add_note_page.dart';
+import 'package:daylio/features/diary/views/note/widget/firebase_storage_services.dart';
 import 'package:daylio/features/diary/views/note/widget/note.dart';
 import 'package:daylio/utils/constants/colors.dart';
 import 'package:daylio/utils/constants/sizes.dart';
@@ -13,15 +14,17 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class NotesScreen extends StatelessWidget {
-  const NotesScreen({super.key, required this.date});
+  NotesScreen({super.key, required this.date});
 
   final DateTime date;
+  final Storage storage = Storage();
 
   @override
   Widget build(BuildContext context) {
     // Assume this method returns the list of notes for the given date
     final controller = Get.put(CalendarController());
     List<Note> notesForTheDay = controller.getNotesForDay(date);
+    final darkMode = THelperFunctions.isDarkMode(context);
 
     if (notesForTheDay.isEmpty) {
       return Scaffold(
@@ -76,7 +79,7 @@ class NotesScreen extends StatelessWidget {
                 children: [
                   ContainerCustom(
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      padding: const EdgeInsets.only(bottom: 8.0),
                       child: Column(
                         children: notesForTheDay.map((note) {
                           return Padding(
@@ -107,14 +110,15 @@ class NotesScreen extends StatelessWidget {
                                               ),
                                             ),
                                             Text(
-                                              getRandomTime(), // Assuming this is the time
-                                              style: const TextStyle(color: TColors.grey, fontSize: TSizes.fontSizeMd),
+                                              DateFormat('HH:mm').format(note.date), // Assuming this is the time
+                                              style:
+                                              TextStyle(color: darkMode ? TColors.white.withOpacity(0.5) : TColors.dark.withOpacity(0.5), fontSize: TSizes.fontSizeMd),
                                             ),
                                           ],
                                         ),
                                       ],
                                     ),
-                                    const SizedBox(width: 27),
+                                    const SizedBox(width: TSizes.xl),
                                     Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
@@ -131,12 +135,12 @@ class NotesScreen extends StatelessWidget {
                                             Icon(Icons.directions_walk, color: Colors.green),
                                           ],
                                         ),
-                                        const SizedBox(height: 18),
+                                        const SizedBox(height: TSizes.md),
                                         SizedBox(
-                                          width: THelperFunctions.screenWidth() - 2 * TSizes.defaultSpace - 120,
+                                          width: THelperFunctions.screenWidth() - 2 * TSizes.defaultSpace - 130,
                                           child: Text(
                                             note.text,
-                                            style: Theme.of(context).textTheme.bodyMedium,
+                                            style: Theme.of(context).textTheme.bodySmall!.copyWith(color: darkMode ? TColors.white.withOpacity(0.5) : TColors.black.withOpacity(0.6)),
                                           ),
                                         ),
                                         const SizedBox(height: 16),
@@ -150,10 +154,21 @@ class NotesScreen extends StatelessWidget {
                                     ),
                                   ],
                                 ),
+
+                                Positioned(
+                                  top: 0, // Top position
+                                  bottom: 0, // Bottom position to stretch the line vertically
+                                  left: 70,
+                                  child: Container(
+                                    width: 1.0, // Line thickness
+                                    color: darkMode ? TColors.white.withOpacity(0.5) : TColors.black.withOpacity(0.2),
+                                  ),
+                                ),
+
                                 Positioned(
                                   right: -10,
                                   top: -10,
-                                  child: buildPopupMenuButton(context),
+                                  child: buildPopupMenuButton(context, note),
                                 ),
                               ],
                             ),
@@ -181,19 +196,41 @@ class NotesScreen extends StatelessWidget {
     );
   }
 
-  PopupMenuButton<String> buildPopupMenuButton(context) {
+  int getDaysInMonth(DateTime date) {
+    DateTime firstOfNextMonth = (date.month < 12) ? DateTime(date.year, date.month + 1, 1) : DateTime(date.year + 1, 1, 1);
+    DateTime lastOfThisMonth = firstOfNextMonth.subtract(Duration(days: 1));
+    return lastOfThisMonth.day;
+  }
+
+  List<DateTime> getDaysListForMonth(DateTime date) {
+    List<DateTime> days = [];
+    int daysInMonth = getDaysInMonth(date);
+
+    for (int i = daysInMonth; i > 1; i--) {
+      days.add(DateTime(date.year, date.month, i));
+    }
+
+    return days;
+  }
+
+  PopupMenuButton<String> buildPopupMenuButton(context, Note note) {
     return PopupMenuButton<String>(
       onSelected: (String value) {
         // Handle the action based on the selected value
-        print('Selected: $value');
+        print('Selected: $value ${note.id}');
         switch (value) {
           case 'Edit':
+            Get.to(const AddNoteScreen(), arguments: note);
+            //note.text = "hiha";
+            //storage.updateNote(note);
+            //Get.put(HomeController()).updateSelectedMonthPage(note.date);
             break;
           case 'Share':
-            // Handle share action
+          // Handle share action
             break;
           case 'Delete':
-            // Handle delete action
+            storage.deleteNote(note);
+            Get.put(CalendarController()).updateSelectedMonthPage(note.date);
             break;
         }
       },
@@ -221,14 +258,37 @@ class NotesScreen extends StatelessWidget {
         future: Get.put(CalendarController()).storage.downloadURL(image, dateTime),
         builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
           if (snapshot.connectionState == ConnectionState.done && snapshot.hasData) {
-            return Padding(
-              padding: const EdgeInsets.only(right: TSizes.spaceBtwItems),
-              child: Container(
-                width: 50.0,
-                height: 50.0,
-                decoration: BoxDecoration(
+            return GestureDetector(
+              onTap: () {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return Dialog(
+                      backgroundColor: Colors.transparent,
+                      child: Container(
+                        width: double.infinity,
+                        height: double.infinity,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: NetworkImage(snapshot.data!),
+                            fit: BoxFit.contain,
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                );
+              },
+              child: Padding(
+                padding: const EdgeInsets.only(right: TSizes.spaceBtwItems),
+                child: Container(
+                  width: 50.0,
+                  height: 50.0,
+                  decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    image: DecorationImage(image: NetworkImage(snapshot.data!), fit: BoxFit.cover)),
+                    image: DecorationImage(image: NetworkImage(snapshot.data!), fit: BoxFit.cover),
+                  ),
+                ),
               ),
             );
           }
@@ -251,19 +311,5 @@ class NotesScreen extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  String getRandomTime() {
-    var random = Random();
-
-    int hour = random.nextInt(24);
-    int minute = random.nextInt(60);
-
-    DateTime now = DateTime.now();
-    DateTime randomTime = DateTime(now.year, now.month, now.day, hour, minute);
-
-    String formattedTime = DateFormat('HH:mm').format(randomTime);
-
-    return formattedTime;
   }
 }
