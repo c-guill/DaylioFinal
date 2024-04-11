@@ -30,8 +30,14 @@ class _AddNoteScreen extends State<AddNoteScreen>{
   final Storage storage = Storage();
   bool tap = false;
   bool check_edit = false;
+  bool check_chargement = false;
+  bool check_chargement2 = false;
+  bool check_chargement_text = false;
+  bool check_chargement_image = false;
   List<String> imagePath = [];
   final ImagePicker _picker = ImagePicker();
+  List<String> states = ['very_happy_b.png', 'happy_b.png', 'meh_b.png', 'sad_b.png', 'very_sad_b.png'];
+  List<String> states2 = ['excited_b.png','relaxed_b.png','proud_b.png','hopeful_b.png','happy2_b.png','tired_b.png','lonely_b.png','angry_b.png','annoyed_b.png','lucky_b.png','sad2_b.png','anxious_b.png',];
   Map<String, bool> tapStates = {
     'very_happy_b.png': false,
     'happy_b.png': false,
@@ -64,13 +70,36 @@ class _AddNoteScreen extends State<AddNoteScreen>{
   final TextEditingController _textFieldController = TextEditingController();
 
   @override
+  void initState() {
+    super.initState();
+    // Ajouter un listener au TextEditingController
+    _textFieldController.addListener(_updateText);
+  }
+
+  @override
   Widget build(BuildContext context) {
     final edit = Get.arguments;
     if (edit == null || edit.toString().isEmpty) {
       check_edit = false ;
     }else{
       check_edit = true;
-      
+      if (check_chargement==false){
+        tapStates[states[edit.emotion-1]] = true;
+      }
+      if (check_chargement2==false){
+        for (var element in edit.feeling) {
+          tapStates2[states2[element-1]] = true;
+        }
+      }
+      if (check_chargement_text==false){
+        myData.text = edit.text;
+        _textFieldController.text = myData.text;
+      }
+      if (check_chargement_image==false){
+        myData.image = edit.image;
+        check_chargement_image = true;
+      }
+
     }
     DateTime now = DateTime.now();
   String formattedDate = '${now.year}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}';
@@ -117,11 +146,11 @@ class _AddNoteScreen extends State<AddNoteScreen>{
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            buildEmojiImage('very_happy_b.png',context),
-                            buildEmojiImage('happy_b.png',context),
-                            buildEmojiImage('meh_b.png',context),
-                            buildEmojiImage('sad_b.png',context),
-                            buildEmojiImage('very_sad_b.png',context),
+                            buildEmojiImage(states[0],context),
+                            buildEmojiImage(states[1],context),
+                            buildEmojiImage(states[2],context),
+                            buildEmojiImage(states[3],context),
+                            buildEmojiImage(states[4],context),
                         ]
                       )
                     ),
@@ -205,6 +234,7 @@ class _AddNoteScreen extends State<AddNoteScreen>{
                             MaterialPageRoute(builder: (context) => WriteNoteScreen(myData: myData)), 
                           );
                           if (result != null) {
+                            check_chargement_text = true;
                             myData.text = result;
                             _textFieldController.text = result;
                           }
@@ -450,6 +480,7 @@ class _AddNoteScreen extends State<AddNoteScreen>{
   Widget buildEmojiImage(String imageName, BuildContext context) {
     return GestureDetector(
       onTap: () {
+        check_chargement = true;
         setState(() {
           for (var key in tapStates.keys) {
             tapStates[key] = false;
@@ -475,9 +506,17 @@ class _AddNoteScreen extends State<AddNoteScreen>{
   Widget buildEmojiImage2(String imageName, BuildContext context) {
     return GestureDetector(
       onTap: () {
+        check_chargement2=true;
         setState(() {
           tapStates2[imageName] = !tapStates2[imageName]!;
         });
+        print(tapStates2);
+        print(imageName);
+        print(tapStates2[imageName]);
+        tapStates2[imageName] == true ? 
+              print('assets/images/emoji/${imageName.replaceAll("_b", "")}') 
+              : 
+              print('assets/images/emoji/$imageName');
       },
       child: Stack(
       alignment: Alignment.center,
@@ -501,6 +540,13 @@ class _AddNoteScreen extends State<AddNoteScreen>{
       ],
     ),
     );
+  }
+
+  void _updateText() {
+    setState(() {
+      check_chargement_text = true;
+      myData.text = _textFieldController.text;
+    });
   }
 
 }

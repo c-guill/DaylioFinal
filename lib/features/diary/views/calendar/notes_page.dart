@@ -217,7 +217,7 @@ class NotesScreen extends StatelessWidget {
         print('Selected: $value ${note.id}');
         switch (value) {
           case 'Edit':
-            Get.to(const AddNoteScreen(), arguments: note);
+            Get.to(() => const AddNoteScreen(), arguments: note);
             //note.text = "hiha";
             //storage.updateNote(note);
             //Get.put(HomeController()).updateSelectedMonthPage(note.date);
