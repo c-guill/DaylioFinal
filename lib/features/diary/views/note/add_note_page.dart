@@ -228,7 +228,6 @@ class _AddNoteScreen extends State<AddNoteScreen>{
               Expanded(
                 child: GestureDetector(
                         onTap: () async {
-                          myData.text = _textFieldController.text;
                           String? result = await Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) => WriteNoteScreen(myData: myData)), 
@@ -257,6 +256,7 @@ class _AddNoteScreen extends State<AddNoteScreen>{
                       decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       hintText: myData.text != "" ? "" : TTexts.write,
+                      contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
                       ),
                       ),
                   ],
@@ -420,7 +420,6 @@ class _AddNoteScreen extends State<AddNoteScreen>{
             Expanded(
               child:GestureDetector(
               onTap: () {
-                // Action lorsque le premier widget est tapé
                 if (myData.text.isEmpty){
                   myData.text = _textFieldController.text;
                 }
@@ -438,7 +437,6 @@ class _AddNoteScreen extends State<AddNoteScreen>{
                   }
                   j+=1;
                 }
-                print(myData.image);
                 if (check_edit==false){
                   storage.addNote(myData);
                 }else{
@@ -510,13 +508,6 @@ class _AddNoteScreen extends State<AddNoteScreen>{
         setState(() {
           tapStates2[imageName] = !tapStates2[imageName]!;
         });
-        print(tapStates2);
-        print(imageName);
-        print(tapStates2[imageName]);
-        tapStates2[imageName] == true ? 
-              print('assets/images/emoji/${imageName.replaceAll("_b", "")}') 
-              : 
-              print('assets/images/emoji/$imageName');
       },
       child: Stack(
       alignment: Alignment.center,
