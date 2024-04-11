@@ -9,6 +9,7 @@ import 'package:iconsax/iconsax.dart';
 
 import '../../../../../common/widgets/basic_widget/toast.dart';
 import '../../../../../common/widgets/shared_preferences/manage_data.dart';
+import '../../../../diary/views/note/widget/firebase_storage_services.dart';
 import '../../../controllers/firebase_auth_services.dart';
 
 class TSignupForm extends StatefulWidget {
@@ -28,14 +29,19 @@ class _TSignupForm extends State<TSignupForm> {
 
   final FirebaseAuthService _auth = FirebaseAuthService();
   final ManageData manageData = ManageData();
+  final Storage storage = Storage();
 
 
+  TextEditingController _firstNameController = TextEditingController();
+  TextEditingController _lastNameController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   TextEditingController _passwordVerificationController = TextEditingController();
 
   @override
   void dispose() {
+    _firstNameController.dispose();
+    _lastNameController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
     _passwordVerificationController.dispose();
@@ -52,6 +58,7 @@ class _TSignupForm extends State<TSignupForm> {
             children: [
               Expanded(
                 child: TextFormField(
+                  controller: _firstNameController,
                   expands: false,
                   decoration: const InputDecoration(
                     labelText: TTexts.firstName,
@@ -62,6 +69,7 @@ class _TSignupForm extends State<TSignupForm> {
               const SizedBox(width: TSizes.spaceBtwInputFields),
               Expanded(
                 child: TextFormField(
+                  controller: _lastNameController,
                   expands: false,
                   decoration: const InputDecoration(
                     labelText: TTexts.lastName,
@@ -155,6 +163,8 @@ class _TSignupForm extends State<TSignupForm> {
       _isSigning = true;
     });
 
+    String firstName = _firstNameController.text;
+    String lastName = _lastNameController.text;
     String email = _emailController.text;
     String password = _passwordController.text;
     String passwordVerification = _passwordVerificationController.text;
@@ -164,8 +174,8 @@ class _TSignupForm extends State<TSignupForm> {
         User? user = await _auth.signUpWithEmailAndPassword(email, password);
         if(user != null) {
           await user.sendEmailVerification();
+          storage.insertData(user.uid, firstName, lastName);
           Get.to(() => const VerifyEmailScreen());
-          manageData.setUID(user);
         }
       }else {
         showToast(message: "Those passwords didn’t match. Try again.");
