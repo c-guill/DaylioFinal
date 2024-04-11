@@ -45,7 +45,7 @@ class HomeController extends GetxController {
 
       for (var note in monthNotes) {
         // Use the date as the key to group notes by date
-        final noteDate = DateTime(note.date.year, note.date.month, note.date.day, note.date.hour, note.date.minute);
+        final noteDate = DateTime(note.date.year, note.date.month, note.date.day);
 
         // If the key doesn't exist, create a new list, otherwise add to the existing list
         if (newEventSource[noteDate] == null) {
@@ -70,6 +70,10 @@ class HomeController extends GetxController {
     // Iterate through the map to find the list of events for the specified day
     for (var entry in eventsMap.entries) {
       if (isSameDay(entry.key, day)) {
+        // Sort the notes in descending order by date before printing and returning
+        var notes = entry.value;
+        notes.sort((a, b) => b.date.compareTo(a.date));
+
         return entry.value;
       }
     }

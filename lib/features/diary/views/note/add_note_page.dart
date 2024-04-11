@@ -29,14 +29,15 @@ class _AddNoteScreen extends State<AddNoteScreen>{
   double heightPhoto = 150;
   final Storage storage = Storage();
   bool tap = false;
+  bool check_edit = false;
   List<String> imagePath = [];
   final ImagePicker _picker = ImagePicker();
   Map<String, bool> tapStates = {
-    'very_sad_b.png': false,
-    'sad_b.png': false,
-    'meh_b.png': false,
-    'happy_b.png': false,
     'very_happy_b.png': false,
+    'happy_b.png': false,
+    'meh_b.png': false,
+    'sad_b.png': false,
+    'very_sad_b.png': false,
   };
   Map<String, bool> tapStates2 = {
     'excited_b.png': false,
@@ -64,6 +65,13 @@ class _AddNoteScreen extends State<AddNoteScreen>{
 
   @override
   Widget build(BuildContext context) {
+    final edit = Get.arguments;
+    if (edit == null || edit.toString().isEmpty) {
+      check_edit = false ;
+    }else{
+      check_edit = true;
+      
+    }
     DateTime now = DateTime.now();
   String formattedDate = '${now.year}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}';
 
@@ -386,8 +394,8 @@ class _AddNoteScreen extends State<AddNoteScreen>{
                 if (myData.text.isEmpty){
                   myData.text = _textFieldController.text;
                 }
-                int i = 0;
-                int j = 0;
+                int i = 1;
+                int j = 1;
                 for (var key in tapStates.keys) {
                   if (tapStates[key] != false){
                     myData.emotion = i;
@@ -401,7 +409,16 @@ class _AddNoteScreen extends State<AddNoteScreen>{
                   j+=1;
                 }
                 print(myData.image);
-                storage.addNote(myData);
+                if (check_edit==false){
+                  storage.addNote(myData);
+                }else{
+                  edit.text = myData.text;
+                  edit.emotion = myData.emotion;
+                  edit.feeling = myData.feeling;
+                  edit.image = myData.image;
+                  storage.updateNote(edit);
+                }
+                
                 final controller = Get.put(HomeController()).updateSelectedMonthPage(DateTime.now());
                 Get.back();
               ; 

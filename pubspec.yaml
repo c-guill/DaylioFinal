@@ -47,7 +47,10 @@ dependencies:
   firebase_auth: ^4.6.3
   firebase_storage: ^11.2.4
   google_sign_in: ^6.1.5
-  image_picker: ^1.0.7
+
+  #Camera
+  image_picker: ^0.8.4+3
+
 
 #------------------------- ./ PACKAGES END -------------------------#
 dev_dependencies:
@@ -55,6 +58,8 @@ dev_dependencies:
     sdk: flutter
   # Lints
   flutter_lints: ^3.0.1
+  #Camera
+  image_picker: ^0.8.4+3
 
 
 #------------------------- FLUTTER -------------------------#
@@ -71,6 +76,7 @@ flutter:
     - assets/icons/emotions/
     - assets/fonts/
     - assets/logos/
+
   # LOCAL FONTS
   fonts:
     - family: Poppins
