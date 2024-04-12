@@ -189,4 +189,47 @@ class Storage {
     }
     return null;
   }
+
+  Future<List<Note>?> getAllNotesForUser() async {
+    List<Note> allNotes = [];
+    try {
+      String uid = await manageData.getUID();
+      // Presuming you know the range or can calculate it
+      List<String> allDates = generateDateCollectionNames(DateTime(2023, 1, 1), DateTime.now());
+
+      for (String date in allDates) {
+        QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+            .collection('users/$uid/$date')
+            .get();
+
+        for (var doc in querySnapshot.docs) {
+          allNotes.add(Note(
+            text: doc["text"],
+            image: doc["image"],
+            date: DateTime.fromMillisecondsSinceEpoch(doc["date"]),
+            emotion: doc["emotion"],
+            feeling: doc["feeling"],
+            id: doc.id,
+          ));
+        }
+      }
+      return allNotes;
+    } catch (e) {
+      print("An error occurred, please try again: $e");
+      return null; // It's better to return an empty list rather than null for better null-safety compliance.
+    }
+  }
+
+// Function to generate a list of date strings in the "MMyyyy" format between two dates
+  List<String> generateDateCollectionNames(DateTime start, DateTime end) {
+    List<String> dates = [];
+    DateFormat formatter = DateFormat('MMyyyy');
+
+    for (DateTime date = start; date.isBefore(end); date = DateTime(date.year, date.month + 1)) {
+      dates.add(formatter.format(date));
+    }
+
+    dates.add(formatter.format(end)); // Ensure the end date is included
+    return dates;
+  }
 }

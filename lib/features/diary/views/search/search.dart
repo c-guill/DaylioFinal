@@ -1,4 +1,5 @@
 import 'package:daylio/common/widgets/appbar/appbar.dart';
+import 'package:daylio/features/diary/views/search/search_results.dart';
 import 'package:daylio/features/diary/views/search/widgets/search_enemy_avatar.dart';
 import 'package:daylio/features/diary/views/search/widgets/search_notecard.dart';
 import 'package:daylio/features/diary/views/search/widgets/search_tagchip.dart';
@@ -28,10 +29,14 @@ class SearchScreen extends StatelessWidget {
             // Header
             TAppBar(
               title: TextFormField(
+                controller: TextEditingController(),
                 decoration: const InputDecoration(
                   prefixIcon: Icon(Iconsax.search_favorite),
                   labelText: TTexts.search,
                 ),
+                onFieldSubmitted: (String value) {
+                  Get.to(() => SearchResultsScreen(data: value), transition: Transition.rightToLeft, duration: const Duration(milliseconds: 500));
+                }
               ),
               actions: [
                 IconButton(

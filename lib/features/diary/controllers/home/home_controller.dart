@@ -78,7 +78,7 @@ class HomeController extends GetxController {
       }
     }
 
-    // If no events found for the day, return an empty list
+    // If no notes found for the day, return an empty list
     return [];
   }
 }

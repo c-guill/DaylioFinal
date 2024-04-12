@@ -31,11 +31,11 @@ class THomeAppBar extends StatelessWidget {
           icon: Icon(Icons.share_outlined, color: darkMode ? TColors.iconPrimaryDark : TColors.iconPrimaryLight, size: 24),
         ),
         IconButton(
-          onPressed: () => Get.to(const AddNoteScreen(), arguments: null),
+          onPressed: () => Get.to(const AddNoteScreen(), arguments: null, transition: Transition.downToUp, duration: const Duration(milliseconds: 500)),
           icon: Icon(Icons.add_circle_outline, color: darkMode ? TColors.iconPrimaryDark : TColors.iconPrimaryLight, size: 24),
         ),
         IconButton(
-          onPressed: () => Get.to(const SearchScreen()),
+          onPressed: () => Get.to(const SearchScreen(), transition: Transition.upToDown, duration: const Duration(milliseconds: 500)),
           icon: Icon(Icons.search, color: darkMode ? TColors.iconPrimaryDark : TColors.iconPrimaryLight, size: 24),
         ),
       ],
