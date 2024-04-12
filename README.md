@@ -16,6 +16,11 @@ For help getting started with Flutter development, view the
 samples, guidance on mobile development, and a full API reference.
 
 ## Some images of application
+![image](https://github.com/eccedentesiast-kid/daylio/assets/91082621/facdf849-61cd-4714-8a14-bd02817aac97)
+![image](https://github.com/eccedentesiast-kid/daylio/assets/91082621/13dd2921-769c-41e7-84c0-be245753e6be)
+![image](https://github.com/eccedentesiast-kid/daylio/assets/91082621/305f436b-bc65-4745-8380-fc405ab5ca93)
+![image](https://github.com/eccedentesiast-kid/daylio/assets/91082621/3503ff59-8c8a-415e-86ed-7325a41ba308)
+![image](https://github.com/eccedentesiast-kid/daylio/assets/91082621/087a1244-3bae-4f2f-abae-bc93597e12aa)
 ![image](https://github.com/eccedentesiast-kid/daylio/assets/91082621/89ac1ce0-975b-432c-928a-f019e83e3891)
 ![image](https://github.com/eccedentesiast-kid/daylio/assets/91082621/70ba58a1-2bfa-487c-9950-cd21afc77690)
 ![image](https://github.com/eccedentesiast-kid/daylio/assets/91082621/52329118-30a3-4e27-b283-7b79f50b38fe)
