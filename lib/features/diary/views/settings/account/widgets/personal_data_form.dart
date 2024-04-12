@@ -2,6 +2,7 @@ import 'package:daylio/utils/validators/validation.dart';
 import 'package:flutter/material.dart';
 import 'package:daylio/utils/constants/sizes.dart';
 import 'package:daylio/utils/constants/text_strings.dart';
+import '../../../note/widget/firebase_storage_services.dart';
 
 class PersonalDataForm extends StatefulWidget {
   const PersonalDataForm({super.key});
@@ -13,6 +14,34 @@ class _PersonalDataFormState extends State<PersonalDataForm> {
   final _formKey = GlobalKey<FormState>();
   TextEditingController firstNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
+  String firstName = '';
+  String lastName = '';
+
+  @override
+  void initState() {
+    super.initState();
+    _loadPersonalData();
+  }
+
+  Future<void> _loadPersonalData() async {
+    final Storage storage = Storage();
+    final loadedFirstName = await storage.getFirstName();
+    final loadedLastName = await storage.getLastName();
+    setState(() {
+      firstName = loadedFirstName;
+      lastName = loadedLastName;
+      firstNameController.text = firstName;
+      lastNameController.text = lastName;
+    });
+  }
+
+  Future<void> _updateData() async {
+    final Storage storage = Storage();
+    final newFirstName = firstNameController.text;
+    final newLastName = lastNameController.text;
+    await storage.updateData(newFirstName, newLastName);
+    await _loadPersonalData();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +51,20 @@ class _PersonalDataFormState extends State<PersonalDataForm> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Text(
+              'First Name: $firstName',
+              style: const TextStyle(
+                fontSize: TSizes.fontSizeLg,
+              ),
+            ),
+            const SizedBox(height: TSizes.spaceBtwSections),
+            Text(
+              'Last Name: $lastName',
+              style: const TextStyle(
+                fontSize: TSizes.fontSizeLg,
+              ),
+            ),
+            const SizedBox(height: TSizes.spaceBtwSections),
             const Text(
               TTexts.editPersonalDetails,
               style: TextStyle(
@@ -49,10 +92,9 @@ class _PersonalDataFormState extends State<PersonalDataForm> {
             ),
             const SizedBox(height: TSizes.spaceBtwSections),
             ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
                 if (_formKey.currentState!.validate()) {
-                  print('First Name: ${firstNameController.text}');
-                  print('Last Name: ${lastNameController.text}');
+                  await _updateData();
                 }
               },
               child: const Text(TTexts.save),

@@ -63,7 +63,7 @@ class Storage {
   }
 
 Future<String> getLastName() async{
-  String result = "wrong";/*
+  String result = "";
   try {
     String UID = await manageData.getUID();
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance.collection('informations/$UID').get();
@@ -74,7 +74,7 @@ Future<String> getLastName() async{
 
   }catch (e){
     print("An error occured, please try again $e");
-  }*/
+  }
   return result;
 }
 
