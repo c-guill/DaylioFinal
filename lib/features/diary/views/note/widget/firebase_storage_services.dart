@@ -50,11 +50,10 @@ class Storage {
     String result = "FirstName";
     try {
       String UID = await manageData.getUID();
-      QuerySnapshot querySnapshot = await FirebaseFirestore.instance.collection('informations/$UID').get();
-      for (var doc in querySnapshot.docs) {
-        result = doc["firstName"];
+      DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance.collection('informations').doc(UID).get();
+      if(documentSnapshot.exists){
+        result = documentSnapshot.get('firstName') ?? 'FirstName';
       }
-      return result;
 
     }catch (e){
       print("An error occured, please try again $e");
@@ -66,11 +65,10 @@ Future<String> getLastName() async{
   String result = "LastName";
   try {
     String UID = await manageData.getUID();
-    QuerySnapshot querySnapshot = await FirebaseFirestore.instance.collection('informations/$UID').get();
-    for (var doc in querySnapshot.docs) {
-      result = doc["lastName"];
+    DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance.collection('informations').doc(UID).get();
+    if(documentSnapshot.exists){
+      result = documentSnapshot.get('lastName') ?? 'LastName';
     }
-    return result;
 
   }catch (e){
     print("An error occured, please try again $e");
@@ -79,8 +77,8 @@ Future<String> getLastName() async{
 }
 
   Future<void> insertData(String UID, String firstname, String lastname) async {
-      CollectionReference collRef = FirebaseFirestore.instance.collection('informations/$UID');
-      collRef.add({
+      CollectionReference collRef = FirebaseFirestore.instance.collection('informations');
+      collRef.doc(UID).set({
         'firstName': firstname,
         'lastName': lastname,
       });
