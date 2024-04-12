@@ -51,15 +51,31 @@ class _PersonalDataFormState extends State<PersonalDataForm> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            const Text(
+              'First Name:',
+              style: TextStyle(
+                fontSize: TSizes.fontSizeLg,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: TSizes.spaceBtwItems),
             Text(
-              'First Name: $firstName',
+              firstName,
               style: const TextStyle(
                 fontSize: TSizes.fontSizeLg,
               ),
             ),
             const SizedBox(height: TSizes.spaceBtwSections),
+            const Text(
+              'Last Name:',
+              style: TextStyle(
+                fontSize: TSizes.fontSizeLg,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: TSizes.spaceBtwItems),
             Text(
-              'Last Name: $lastName',
+              lastName,
               style: const TextStyle(
                 fontSize: TSizes.fontSizeLg,
               ),

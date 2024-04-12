@@ -47,7 +47,7 @@ class Storage {
   }
 
   Future<String> getFirstName() async{
-    String result = "";
+    String result = "FirstName";
     try {
       String UID = await manageData.getUID();
       QuerySnapshot querySnapshot = await FirebaseFirestore.instance.collection('informations/$UID').get();
@@ -63,7 +63,7 @@ class Storage {
   }
 
 Future<String> getLastName() async{
-  String result = "";
+  String result = "LastName";
   try {
     String UID = await manageData.getUID();
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance.collection('informations/$UID').get();
