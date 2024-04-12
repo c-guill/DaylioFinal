@@ -49,7 +49,7 @@ class NotesScreen extends StatelessWidget {
                       width: double.infinity,
                       child: ElevatedButton(
                         onPressed: () {
-                          Get.to(const AddNoteScreen());
+                          Get.to(const AddNoteScreen(), arguments: Note(id: '', text: '', emotion: 1, feeling: [], image: [], date: date));
                         },
                         child: const Text('Create a new note!'),
                       ),

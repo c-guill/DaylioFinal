@@ -20,6 +20,8 @@ class TColors {
   static const Color textBlack = Colors.black;
   static Color textDarkTheme = const Color(0xFFFFFFFF).withOpacity(0.8);
   static Color textLightTheme = const Color(0xFF000000).withOpacity(0.8);
+  static Color textDark = const Color(0xFFFFFFFF).withOpacity(0.5);
+  static Color textLight = const Color(0xFF000000).withOpacity(0.5);
 
   // Foreground colors
   static const Color light = Color(0xFFF6F6F6);

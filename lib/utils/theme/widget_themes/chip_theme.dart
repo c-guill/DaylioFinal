@@ -10,13 +10,15 @@ class TChipTheme {
     selectedColor: TColors.primary,
     padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 12),
     checkmarkColor: TColors.white,
+    shadowColor: Colors.black.withOpacity(0.1),
   );
 
-  static ChipThemeData darkChipTheme = const ChipThemeData(
+  static ChipThemeData darkChipTheme = ChipThemeData(
     disabledColor: TColors.darkerGrey,
-    labelStyle: TextStyle(color: TColors.white),
+    labelStyle: const TextStyle(color: TColors.white),
     selectedColor: TColors.primary,
-    padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 12),
+    padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 12),
     checkmarkColor: TColors.white,
+    shadowColor: Colors.white.withOpacity(0.1),
   );
 }

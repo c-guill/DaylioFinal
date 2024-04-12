@@ -9,6 +9,7 @@ class TTexts {
   static const String cancel = "Cancel";
   static const String save = "Save";
   static const String reset = "Reset";
+  static const String search = "Search";
   static const String appName = "daylio";
   static const String tContinue = "Continue";
 

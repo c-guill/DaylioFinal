@@ -1,5 +1,6 @@
 import 'package:daylio/common/widgets/appbar/appbar.dart';
 import 'package:daylio/features/diary/views/note/add_note_page.dart';
+import 'package:daylio/features/diary/views/search/search.dart';
 import 'package:daylio/utils/constants/colors.dart';
 import 'package:daylio/utils/constants/image_strings.dart';
 import 'package:daylio/utils/constants/text_strings.dart';
@@ -34,7 +35,7 @@ class THomeAppBar extends StatelessWidget {
           icon: Icon(Icons.add_circle_outline, color: darkMode ? TColors.iconPrimaryDark : TColors.iconPrimaryLight, size: 24),
         ),
         IconButton(
-          onPressed: () {},
+          onPressed: () => Get.to(const SearchScreen()),
           icon: Icon(Icons.search, color: darkMode ? TColors.iconPrimaryDark : TColors.iconPrimaryLight, size: 24),
         ),
       ],
