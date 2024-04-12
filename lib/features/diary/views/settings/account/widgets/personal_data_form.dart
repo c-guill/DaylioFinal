@@ -52,36 +52,6 @@ class _PersonalDataFormState extends State<PersonalDataForm> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              'First Name:',
-              style: TextStyle(
-                fontSize: TSizes.fontSizeLg,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: TSizes.spaceBtwItems),
-            Text(
-              firstName,
-              style: const TextStyle(
-                fontSize: TSizes.fontSizeLg,
-              ),
-            ),
-            const SizedBox(height: TSizes.spaceBtwSections),
-            const Text(
-              'Last Name:',
-              style: TextStyle(
-                fontSize: TSizes.fontSizeLg,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: TSizes.spaceBtwItems),
-            Text(
-              lastName,
-              style: const TextStyle(
-                fontSize: TSizes.fontSizeLg,
-              ),
-            ),
-            const SizedBox(height: TSizes.spaceBtwSections),
-            const Text(
               TTexts.editPersonalDetails,
               style: TextStyle(
                 fontSize: TSizes.fontSizeLg,
